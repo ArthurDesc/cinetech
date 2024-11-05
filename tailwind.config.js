@@ -1,5 +1,6 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
+const colors = require('tailwindcss/colors')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -16,15 +17,13 @@ module.exports = {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
             colors: {
+                primary: colors.orange,
+                secondary: colors.gray,
                 dark: {
-                    'bg': '#121212',
-                    'surface': '#1E1E1E',
-                    'primary': '#121212',
-                    'secondary': '#1E1E1E'
-                },
-                'background': '#121212',
-                'surface': '#1E1E1E',
-                'text': '#FFFFFF'
+                    DEFAULT: '#0a0a0a',
+                    light: '#121212',
+                    lighter: '#1a1a1a',
+                }
             }
         },
     },

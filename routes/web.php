@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\TvShowController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,5 +32,8 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/movies', [MovieController::class, 'index'])->name('movies.index');
 Route::get('/movies/{id}', [MovieController::class, 'show'])->name('movies.show');
+
+Route::get('/tv-shows', [TvShowController::class, 'index'])->name('tvshows.index');
+Route::get('/tv-shows/{id}', [TvShowController::class, 'show'])->name('tvshows.show');
 
 require __DIR__.'/auth.php';
