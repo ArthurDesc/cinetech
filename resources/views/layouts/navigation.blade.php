@@ -14,7 +14,7 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"
                         class="text-gray-900 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white">
-                        {{ __('Dashboard') }}
+                        {{ __('Accueil') }}
                     </x-nav-link>
                     <x-nav-link :href="route('movies.index')" :active="request()->routeIs('movies.index')"
                         class="text-gray-900 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white">
