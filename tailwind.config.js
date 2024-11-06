@@ -24,6 +24,11 @@ module.exports = {
                     light: '#121212',
                     lighter: '#1a1a1a',
                 }
+            },
+            backgroundImage: {
+                'gradient-dark': 'linear-gradient(to top, rgb(234 88 12) 0%, rgb(10 10 10) 50%)',
+                'gradient-dark-subtle': 'linear-gradient(to top, rgb(234 88 12) 0%, rgb(10 10 10) 75%)',
+                'gradient-dark-strong': 'linear-gradient(to top, rgb(234 88 12) 0%, rgb(10 10 10) 25%)',
             }
         },
     },
