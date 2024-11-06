@@ -17,21 +17,29 @@ class TvShowController extends Controller
 
     public function index()
     {
-        $popularShows = $this->getTvShows('popular');
-        $topRatedShows = $this->getTvShows('top_rated');
-        $onAirShows = $this->getTvShows('on_the_air');
+        // Récupérer le numéro de page depuis l'URL
+        $currentPage = request()->get('page', 1);
 
-        // Précharger les URLs des images pour toutes les séries
-        $allShows = [$popularShows, $topRatedShows, $onAirShows];
-        foreach($allShows as &$showList) {
-            foreach($showList as &$show) {
-                $show['poster_url'] = config('services.tmdb.image_base_url') . $show['poster_path'];
-                $show['vote_average'] = round($show['vote_average'], 1);
-                $show['first_air_date'] = \Carbon\Carbon::parse($show['first_air_date'])->format('d/m/Y');
-            }
-        }
+        // Récupérer toutes les séries
+        $response = Http::get("{$this->baseUrl}/discover/tv", [
+            'api_key' => $this->apiKey,
+            'language' => 'fr-FR',
+            'page' => $currentPage,
+            'sort_by' => 'popularity.desc',
+            'include_adult' => false
+        ])->json();
 
-        return view('tv-shows.index', compact('popularShows', 'topRatedShows', 'onAirShows'));
+        // Précharger les URLs des images
+        $shows = collect($response['results'])->map(function($show) {
+            $show['poster_url'] = config('services.tmdb.image_base_url') . $show['poster_path'];
+            return $show;
+        });
+
+        return view('tv-shows.index', [
+            'shows' => $shows,
+            'currentPage' => $currentPage,
+            'totalPages' => $response['total_pages']
+        ]);
     }
 
     public function show($id)
@@ -42,45 +50,33 @@ class TvShowController extends Controller
             'append_to_response' => 'credits,videos,similar'
         ])->json();
 
-        // Précharger les URLs des images pour la série
+        // Précharger les URLs des images
         $show['poster_url'] = config('services.tmdb.image_base_url') . $show['poster_path'];
 
-        // Traiter les acteurs avec une meilleure gestion des images
+        // Traiter les acteurs
         if (isset($show['credits']['cast'])) {
             foreach ($show['credits']['cast'] as &$actor) {
                 $actor['profile_url'] = $actor['profile_path']
                     ? config('services.tmdb.image_base_url') . $actor['profile_path']
-                    : asset('images/placeholder-actor.jpg'); // Assurez-vous d'avoir une image par défaut
+                    : asset('images/placeholder-actor.jpg');
             }
-            // Limiter à 5 acteurs
             $show['credits']['cast'] = array_slice($show['credits']['cast'], 0, 5);
         }
 
         // Traiter les séries similaires
         if (isset($show['similar']['results'])) {
             foreach ($show['similar']['results'] as &$similar) {
-                if (isset($similar['poster_path'])) {
-                    $similar['poster_path'] = config('services.tmdb.image_base_url') . $similar['poster_path'];
-                }
+                $similar['poster_url'] = $similar['poster_path']
+                    ? config('services.tmdb.image_base_url') . $similar['poster_path']
+                    : asset('images/placeholder-poster.jpg');
             }
             $show['similar']['results'] = array_slice($show['similar']['results'], 0, 4);
         }
 
-        // Formater la date
+        // Formater la date et la note
         $show['first_air_date'] = \Carbon\Carbon::parse($show['first_air_date'])->format('d/m/Y');
         $show['vote_average'] = round($show['vote_average'], 1);
 
-        // Debug pour vérifier les données
-        // dd($show['credits']['cast']);
-
         return view('tv-shows.show', compact('show'));
-    }
-
-    private function getTvShows($endpoint)
-    {
-        return Http::get("{$this->baseUrl}/tv/{$endpoint}", [
-            'api_key' => $this->apiKey,
-            'language' => 'fr-FR'
-        ])->json()['results'];
     }
 }

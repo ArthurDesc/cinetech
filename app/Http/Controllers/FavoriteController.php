@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Favorite;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class FavoriteController extends Controller
 {
@@ -50,4 +51,41 @@ class FavoriteController extends Controller
 
         return response()->json(['isFavorite' => $isFavorite]);
     }
-} 
+
+    public function index()
+    {
+        $user = auth()->user();
+
+        // Récupérer tous les favoris de l'utilisateur
+        $favorites = $user->favorites()
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Séparer les films et séries
+        $movieFavorites = collect();
+        $tvFavorites = collect();
+
+        foreach ($favorites as $favorite) {
+            $response = Http::get(config('services.tmdb.base_url') . '/' . $favorite->type . '/' . $favorite->tmdb_id, [
+                'api_key' => config('services.tmdb.api_key'),
+                'language' => 'fr-FR'
+            ]);
+
+            if ($response->successful()) {
+                $data = $response->json();
+                // Ajouter l'URL du poster
+                $data['poster_url'] = $data['poster_path']
+                    ? config('services.tmdb.image_base_url') . $data['poster_path']
+                    : null;
+
+                if ($favorite->type === 'movie') {
+                    $movieFavorites->push($data);
+                } else {
+                    $tvFavorites->push($data);
+                }
+            }
+        }
+
+        return view('favorites.index', compact('movieFavorites', 'tvFavorites'));
+    }
+}

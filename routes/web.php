@@ -5,6 +5,8 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\TvShowController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,8 +39,19 @@ Route::get('/tv-shows', [TvShowController::class, 'index'])->name('tvshows.index
 Route::get('/tv-shows/{id}', [TvShowController::class, 'show'])->name('tvshows.show');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
     Route::post('/favorites/toggle', [FavoriteController::class, 'toggle'])->name('favorites.toggle');
     Route::get('/favorites/check', [FavoriteController::class, 'check'])->name('favorites.check');
+});
+
+Route::get('/search', [SearchController::class, 'search'])->name('search');
+
+Route::prefix('comments')->group(function () {
+    Route::get('/', [CommentController::class, 'index'])->name('comments.index');
+    Route::post('/', [CommentController::class, 'store'])->name('comments.store');
+    Route::put('/{comment}', [CommentController::class, 'update'])->name('comments.update');
+    Route::delete('/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+    Route::post('/{comment}/reply', [CommentController::class, 'reply'])->name('comments.reply');
 });
 
 require __DIR__.'/auth.php';

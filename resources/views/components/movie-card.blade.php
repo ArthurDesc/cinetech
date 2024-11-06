@@ -1,6 +1,6 @@
 @props(['movie'])
 
-<div class="bg-dark-light rounded-lg shadow-lg transition duration-300 hover:scale-105">
+<div class="bg-dark-light rounded-lg shadow-lg transition duration-300 hover:scale-105 relative">
     <a href="{{ route('movies.show', $movie['id']) }}" class="block">
         <div class="relative aspect-[2/3]">
             <div class="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse rounded-t-lg"></div>
@@ -20,4 +20,9 @@
             </span>
         </div>
     </a>
+
+    <x-favorite-button-card
+        :tmdbId="$movie['id']"
+        type="movie"
+    />
 </div>

@@ -1,33 +1,32 @@
 <x-app-layout>
     <div class="container mx-auto px-4 py-8 bg-gradient-dark min-h-screen">
-        {{-- Films Populaires --}}
-        <section class="mb-8">
-            <h2 class="text-2xl font-bold mb-4 text-white">Films Populaires</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                @foreach($popularMovies as $movie)
-                    <x-movie-card :movie="$movie" />
-                @endforeach
-            </div>
-        </section>
+        <h2 class="text-2xl font-bold mb-4 text-white">Films</h2>
 
-        {{-- Films les mieux notés --}}
-        <section class="mb-8">
-            <h2 class="text-2xl font-bold mb-4 text-white">Films les mieux notés</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                @foreach($topRatedMovies as $movie)
-                    <x-movie-card :movie="$movie" />
-                @endforeach
-            </div>
-        </section>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            @foreach($movies as $movie)
+                <x-movie-card :movie="$movie" />
+            @endforeach
+        </div>
 
-        {{-- Films à venir --}}
-        <section class="mb-8">
-            <h2 class="text-2xl font-bold mb-4 text-white">Films à venir</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                @foreach($upcomingMovies as $movie)
-                    <x-movie-card :movie="$movie" />
-                @endforeach
-            </div>
-        </section>
+        {{-- Pagination --}}
+        <div class="mt-6 flex justify-center items-center gap-4">
+            @if($currentPage > 1)
+                <a href="{{ route('movies.index', ['page' => $currentPage - 1]) }}"
+                   class="px-4 py-2 bg-dark-light rounded-lg text-gray-400 hover:text-primary-500 transition">
+                    Page précédente
+                </a>
+            @endif
+
+            <span class="text-gray-400">
+                Page {{ $currentPage }} sur {{ $totalPages }}
+            </span>
+
+            @if($currentPage < $totalPages)
+                <a href="{{ route('movies.index', ['page' => $currentPage + 1]) }}"
+                   class="px-4 py-2 bg-dark-light rounded-lg text-gray-400 hover:text-primary-500 transition">
+                    Page suivante
+                </a>
+            @endif
+        </div>
     </div>
 </x-app-layout>

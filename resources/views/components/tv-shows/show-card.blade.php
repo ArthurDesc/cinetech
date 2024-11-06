@@ -1,6 +1,6 @@
 @props(['show'])
 
-<div class="movie-card bg-dark-light rounded-lg shadow-lg transition duration-300 hover:scale-105">
+<div class="movie-card bg-dark-light rounded-lg shadow-lg transition duration-300 hover:scale-105 relative">
     <a href="{{ route('tvshows.show', $show['id']) }}" class="block">
         <div class="relative aspect-[2/3]">
             {{-- Placeholder pendant le chargement --}}
@@ -17,17 +17,15 @@
             <h3 class="text-lg font-semibold text-white mb-2">
                 {{ $show['name'] }}
             </h3>
-            <div class="flex justify-between items-center">
-                <span class="text-sm text-gray-400">
-                    {{ $show['first_air_date'] }}
-                </span>
-                <span class="text-sm text-gray-400">
-                    {{ $show['vote_average'] }}/10
-                </span>
-            </div>
+           
             <span class="text-primary-500 hover:text-primary-400 mt-2 block">
                 Voir plus
             </span>
         </div>
     </a>
+
+    <x-favorite-button-card
+        :tmdbId="$show['id']"
+        type="tv"
+    />
 </div>

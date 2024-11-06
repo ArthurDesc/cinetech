@@ -23,8 +23,44 @@
                 </div>
             </div>
 
+            <div class="hidden sm:flex sm:items-center sm:ms-6 flex-1">
+                <form action="{{ route('search') }}" method="GET" class="w-full max-w-xl mx-auto">
+                    <div class="relative">
+                        <input type="text"
+                               name="query"
+                               placeholder="Rechercher un film ou une série..."
+                               value="{{ request('query') }}"
+                               class="w-full px-4 py-2 bg-dark text-gray-400 rounded-lg
+                                      border border-dark-lighter focus:outline-none
+                                      focus:border-primary-500 focus:ring-1 focus:ring-primary-500">
+
+                        <button type="submit"
+                                class="absolute right-2 top-1/2 -translate-y-1/2
+                                       text-gray-400 hover:text-primary-500">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 class="h-5 w-5"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke="currentColor">
+                                <path stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
             <div class="flex items-center">
                 @auth
+                    <!-- Ajouter l'icône cœur ici, avant le dropdown -->
+                    <a href="{{ route('favorites.index') }}" class="text-gray-400 hover:text-primary-500 mr-4 {{ request()->routeIs('favorites.index') ? 'text-primary-500' : '' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="{{ request()->routeIs('favorites.index') ? 'currentColor' : 'none' }}" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                    </a>
+
                     <!-- Settings Dropdown pour utilisateur connecté -->
                     <div class="hidden sm:flex sm:items-center sm:ms-6">
                         <x-dropdown align="right" width="48">
@@ -89,8 +125,38 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1 bg-dark-light">
+            <div class="px-4">
+                <form action="{{ route('search') }}" method="GET">
+                    <div class="relative">
+                        <input type="text"
+                               name="query"
+                               placeholder="Rechercher..."
+                               value="{{ request('query') }}"
+                               class="w-full px-4 py-2 bg-dark text-gray-400 rounded-lg
+                                      border border-dark-lighter focus:outline-none
+                                      focus:border-primary-500 focus:ring-1 focus:ring-primary-500">
+
+                        <button type="submit"
+                                class="absolute right-2 top-1/2 -translate-y-1/2
+                                       text-gray-400 hover:text-primary-500">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 class="h-5 w-5"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke="currentColor">
+                                <path stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
             @auth
-                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"
+                <x-responsive-nav-link :href="route('dashboard')"
+                    :active="request()->routeIs('dashboard')"
                     class="text-gray-400 hover:text-primary-500 hover:bg-dark-lighter">
                     {{ __('Dashboard') }}
                 </x-responsive-nav-link>

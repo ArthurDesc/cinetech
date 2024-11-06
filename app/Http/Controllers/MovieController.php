@@ -17,21 +17,23 @@ class MovieController extends Controller
 
     public function index()
     {
-        $popularMovies = $this->getMovies('popular');
-        $topRatedMovies = $this->getMovies('top_rated');
-        $upcomingMovies = $this->getMovies('upcoming');
+        // Récupérer le numéro de page depuis l'URL
+        $currentPage = request()->get('page', 1);
 
-        // Précharger les URLs des images pour tous les films
-        $allMovies = [$popularMovies, $topRatedMovies, $upcomingMovies];
-        foreach($allMovies as &$movieList) {
-            foreach($movieList as &$movie) {
-                $movie['poster_url'] = config('services.tmdb.image_base_url') . $movie['poster_path'];
-                $movie['vote_average'] = round($movie['vote_average'], 1); // Arrondir la note
-                $movie['release_date'] = \Carbon\Carbon::parse($movie['release_date'])->format('d/m/Y');
-            }
-        }
+        // Récupérer tous les films
+        $response = Http::get("{$this->baseUrl}/discover/movie", [
+            'api_key' => $this->apiKey,
+            'language' => 'fr-FR',
+            'page' => $currentPage,
+            'sort_by' => 'popularity.desc', // Tri par popularité
+            'include_adult' => false
+        ])->json();
 
-        return view('movies.index', compact('popularMovies', 'topRatedMovies', 'upcomingMovies'));
+        return view('movies.index', [
+            'movies' => $response['results'],
+            'currentPage' => $currentPage,
+            'totalPages' => $response['total_pages']
+        ]);
     }
 
     public function show($id)
@@ -51,18 +53,6 @@ class MovieController extends Controller
         // Arrondir la note
         $movie['vote_average'] = round($movie['vote_average'], 1);
 
-        // Limiter le nombre d'acteurs et de films similaires
-        $movie['credits']['cast'] = array_slice($movie['credits']['cast'], 0, 5);
-        $movie['similar']['results'] = array_slice($movie['similar']['results'], 0, 4);
-
         return view('movies.show', compact('movie'));
-    }
-
-    private function getMovies($endpoint)
-    {
-        return Http::get("{$this->baseUrl}/movie/{$endpoint}", [
-            'api_key' => $this->apiKey,
-            'language' => 'fr-FR'
-        ])->json()['results'];
     }
 }
