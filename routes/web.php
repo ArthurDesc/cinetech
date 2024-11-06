@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\TvShowController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\FavoriteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,5 +35,10 @@ Route::get('/movies/{id}', [MovieController::class, 'show'])->name('movies.show'
 
 Route::get('/tv-shows', [TvShowController::class, 'index'])->name('tvshows.index');
 Route::get('/tv-shows/{id}', [TvShowController::class, 'show'])->name('tvshows.show');
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/favorites/toggle', [FavoriteController::class, 'toggle'])->name('favorites.toggle');
+    Route::get('/favorites/check', [FavoriteController::class, 'check'])->name('favorites.check');
+});
 
 require __DIR__.'/auth.php';
