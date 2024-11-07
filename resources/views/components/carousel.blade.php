@@ -1,50 +1,38 @@
-@if (isset($carouselMovies) && count($carouselMovies) > 0)
-    <div class="mb-8 relative">
-        <div class="splide" id="main-carousel">
-            <div class="splide__track">
-                <ul class="splide__list">
-                    @foreach ($carouselMovies as $movie)
-                        <li class="splide__slide">
-                            <div class="relative h-[600px]">
-                                <img src="{{ $movie['image'] }}" alt="{{ $movie['title'] }}"
-                                    class="w-full h-full object-cover rounded-lg">
-                                <div
-                                    class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent rounded-b-lg">
-                                    <h2 class="text-3xl text-white font-bold">{{ $movie['title'] }}</h2>
-                                    <p class="text-gray-200 mt-2">{{ \Str::limit($movie['overview'], 150) }}</p>
-                                </div>
-                            </div>
-                        </li>
-                    @endforeach
-                </ul>
+<div class="overflow-hidden" x-data="carousel">
+    <div class="embla">
+        <div class="embla__viewport" x-ref="viewport">
+            <div class="embla__container">
+                {{ $slot }}
+            </div>
+        </div>
+
+        {{-- Dots Navigation --}}
+        <div class="absolute bottom-4 left-0 right-0">
+            <div class="flex justify-center gap-2">
+                <template x-for="(_, index) in slides" :key="index">
+                    <button
+                        @click="scrollTo(index)"
+                        class="w-2 h-2 rounded-full transition-all duration-300"
+                        :class="currentSlide === index ? 'bg-white scale-125' : 'bg-white/50'">
+                    </button>
+                </template>
             </div>
         </div>
     </div>
+</div>
 
-    @push('scripts')
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const splideElement = document.getElementById('main-carousel');
-                if (splideElement) {
-                    new Splide('#main-carousel', {
-                        type: 'loop',
-                        drag: 'free',
-                        focus: 'center',
-                        perPage: 1,
-                        height: '600px',
-                        cover: true,
-                        autoScroll: {
-                            speed: 1,
-                            pauseOnHover: true,
-                            pauseOnFocus: true,
-                            rewind: false,
-                            autoStart: true
-                        }
-                    }).mount({
-                        AutoScroll
-                    });
-                }
-            });
-        </script>
-    @endpush
-@endif
+<style>
+.embla {
+    position: relative;
+}
+.embla__viewport {
+    overflow: hidden;
+}
+.embla__container {
+    display: flex;
+}
+.embla__slide {
+    flex: 0 0 100%;
+    min-width: 0;
+}
+</style>

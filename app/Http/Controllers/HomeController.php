@@ -26,6 +26,7 @@ class HomeController extends Controller
         $carouselMovies = array_slice($trendingMovies, 0, 5);
         return array_map(function($movie) {
             return [
+                'id' => $movie['id'],
                 'title' => $movie['title'],
                 'overview' => $movie['overview'],
                 'image' => 'https://image.tmdb.org/t/p/original' . $movie['backdrop_path'],
