@@ -22,7 +22,8 @@
                 Résultats pour "{{ request('query') }}"
             </h2>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {{-- Modification du grid pour 2 colonnes en mobile --}}
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
                 @forelse($results as $result)
                     @if($result['media_type'] === 'movie')
                         <x-movie-card :movie="$result" />
@@ -36,28 +37,15 @@
                 @endforelse
             </div>
 
-            {{-- Pagination --}}
+            {{-- Pagination avec le composant --}}
             @if($results->count() > 0)
-                <div class="mt-6 flex justify-center items-center gap-4">
-                    @if($currentPage > 1)
-                        <a href="{{ route('search', ['query' => request('query'), 'page' => $currentPage - 1]) }}"
-                           class="px-4 py-2 bg-dark-light rounded-lg text-gray-400 hover:text-primary-500 transition">
-                            Page précédente
-                        </a>
-                    @endif
-
-                    <span class="text-gray-400">
-                        Page {{ $currentPage }} sur {{ $totalPages }}
-                    </span>
-
-                    @if($currentPage < $totalPages)
-                        <a href="{{ route('search', ['query' => request('query'), 'page' => $currentPage + 1]) }}"
-                           class="px-4 py-2 bg-dark-light rounded-lg text-gray-400 hover:text-primary-500 transition">
-                            Page suivante
-                        </a>
-                    @endif
-                </div>
+                <x-pagination
+                    :currentPage="$currentPage"
+                    :totalPages="$totalPages"
+                    route="search"
+                    :query="['query' => request('query')]"
+                />
             @endif
         @endif
     </div>
-</x-app-layout> 
+</x-app-layout>

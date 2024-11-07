@@ -1,8 +1,13 @@
 import './bootstrap';
 
 import Alpine from 'alpinejs';
+import Splide from '@splidejs/splide';
+import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
+import '@splidejs/splide/css'; // Pour les styles CSS
 
 window.Alpine = Alpine;
+window.Splide = Splide;
+window.AutoScroll = AutoScroll;
 
 Alpine.start();
 

@@ -14,9 +14,27 @@ class HomeController extends Controller
         $this->apiKey = config('services.tmdb.api_key');
     }
 
+    private function getCarouselMovies()
+    {
+        // Récupérer les films tendance pour le carousel
+        $trendingMovies = Http::get("{$this->baseUrl}/trending/movie/week", [
+            'api_key' => $this->apiKey,
+            'language' => 'fr-FR',
+        ])->json()['results'];
+
+        // Formater les données pour le carousel
+        $carouselMovies = array_slice($trendingMovies, 0, 5);
+        return array_map(function($movie) {
+            return [
+                'title' => $movie['title'],
+                'overview' => $movie['overview'],
+                'image' => 'https://image.tmdb.org/t/p/original' . $movie['backdrop_path'],
+            ];
+        }, $carouselMovies);
+    }
+
     public function index()
     {
-        // Récupérer quelques films et séries populaires pour la page d'accueil
         $popularMovies = Http::get("{$this->baseUrl}/movie/popular", [
             'api_key' => $this->apiKey,
             'language' => 'fr-FR',
@@ -33,6 +51,9 @@ class HomeController extends Controller
         $popularMovies = array_slice($popularMovies, 0, 4);
         $popularShows = array_slice($popularShows, 0, 4);
 
-        return view('home', compact('popularMovies', 'popularShows'));
+        // Récupérer les films du carousel
+        $carouselMovies = $this->getCarouselMovies();
+
+        return view('home', compact('popularMovies', 'popularShows', 'carouselMovies'));
     }
 }

@@ -1,5 +1,8 @@
 <x-app-layout>
     <div class="container mx-auto px-4 py-8">
+        {{-- Carousel Section --}}
+        <x-carousel :slides="$carouselMovies" />
+
         {{-- Hero Section --}}
         <section class="text-center mb-16">
             <h1 class="text-4xl font-bold text-white mb-4">
@@ -8,13 +11,13 @@
             <p class="text-gray-300 text-xl mb-8">
                 Découvrez les meilleurs films et séries
             </p>
-            <div class="flex justify-center gap-4">
+            <div class="flex flex-col sm:flex-row justify-center gap-4 px-4">
                 <a href="{{ route('movies.index') }}"
-                   class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg transition duration-300">
+                   class="w-full sm:w-auto text-center bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg transition duration-300">
                     Explorer les Films
                 </a>
                 <a href="{{ route('tvshows.index') }}"
-                   class="bg-dark-light hover:bg-dark-lighter text-white px-6 py-3 rounded-lg transition duration-300">
+                   class="w-full sm:w-auto text-center bg-dark-light hover:bg-dark-lighter text-white px-6 py-3 rounded-lg transition duration-300">
                     Explorer les Séries
                 </a>
             </div>
