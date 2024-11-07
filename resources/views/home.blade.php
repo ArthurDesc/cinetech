@@ -28,28 +28,47 @@
                 <x-carousel>
                     @foreach($carouselMovies as $movie)
                         <div class="embla__slide">
-                            <div class="relative h-[400px] w-full">
-                                {{-- Overlay sombre pour améliorer la lisibilité --}}
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-10"></div>
-
-                                {{-- Image de fond --}}
+                            <div class="relative h-[400px] w-full group">
+                                {{-- Image de fond avec overlay --}}
                                 <img src="{{ $movie['image'] }}"
                                      alt="{{ $movie['title'] }}"
                                      class="w-full h-full object-cover">
 
-                                {{-- Contenu du slide --}}
-                                <div class="absolute inset-x-0 bottom-0 z-20 p-6">
-                                    <div class="max-w-3xl mx-auto">
-                                        <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">
-                                            {{ $movie['title'] }}
-                                        </h3>
-                                        <p class="text-sm md:text-base text-gray-200 mb-4 line-clamp-2">
-                                            {{ $movie['overview'] }}
-                                        </p>
-                                        <a href="{{ route('movies.show', $movie['id']) }}"
-                                           class="inline-block bg-primary-600 hover:bg-primary-700 text-white px-6 py-2 rounded-lg transition duration-300 text-sm">
-                                            En savoir plus
-                                        </a>
+                                {{-- Overlay amélioré --}}
+                                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80"></div>
+
+                                {{-- Container pour le contenu --}}
+                                <div class="absolute inset-0 p-8 md:p-12">
+                                    <div class="relative h-full flex flex-col justify-end">
+                                        {{-- Contenu à gauche --}}
+                                        <div class="md:max-w-xl">
+                                            {{-- Badge "À l'affiche" --}}
+                                            <span class="inline-block bg-primary-600 text-white text-xs px-3 py-1 rounded-full mb-4">
+                                                À l'affiche
+                                            </span>
+
+                                            {{-- Titre et description --}}
+                                            <div class="space-y-4">
+                                                <h3 class="text-3xl md:text-4xl font-bold text-white tracking-tight">
+                                                    {{ $movie['title'] }}
+                                                </h3>
+
+                                                <p class="text-base text-gray-300 line-clamp-2">
+                                                    {{ $movie['overview'] }}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        {{-- Bouton en bas à droite --}}
+                                        <div class="absolute bottom-0 right-0">
+                                            <a href="{{ route('movies.show', $movie['id']) }}"
+                                               class="inline-flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg transition-all duration-300 group-hover:scale-105">
+                                                <span>En savoir plus</span>
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                                </svg>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
