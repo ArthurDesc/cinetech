@@ -63,7 +63,6 @@ class CommentController extends Controller
 
         } catch (\Exception $e) {
             // Log l'erreur
-            \Log::error('Erreur lors de l\'ajout du commentaire: ' . $e->getMessage());
 
             // Retourner une réponse JSON même en cas d'erreur
             return response()->json([
