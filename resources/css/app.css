@@ -15,7 +15,7 @@
             #e68300 100%
         );
         background-size: 200% 100%;
-        animation: gradientAnimation 15s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+        animation: gradientAnimation 10s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
     }
 }
 
@@ -33,4 +33,13 @@
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
+}
+
+/* Ajoutez ces classes si nécessaire */
+.bg-dark-lighter {
+    @apply bg-dark-lighter/80 backdrop-blur-sm;
+}
+
+.bg-dark {
+    @apply bg-dark/80 backdrop-blur-sm;
 }

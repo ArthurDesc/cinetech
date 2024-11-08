@@ -1,6 +1,6 @@
 <x-app-layout>
     {{-- Contenu principal --}}
-    <div class="container mx-auto px-4 py-8">
+    <div class="container mx-auto px-4 pt-28 pb-8">
         {{-- Hero Section --}}
         <section class="text-center mb-16">
             <h1 class="text-4xl font-bold text-white mb-4">
