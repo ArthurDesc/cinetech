@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->integer('tmdb_id');  // ID du film/série de TMDB
-            $table->string('type');      // 'movie' ou 'tv'
+            $table->integer('tmdb_id');  
+            $table->string('type');
             $table->text('content');
             $table->foreignId('parent_id')->nullable()->constrained('comments')->onDelete('cascade'); // Pour les réponses
             $table->timestamps();

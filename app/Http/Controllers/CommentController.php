@@ -17,25 +17,19 @@ class CommentController extends Controller
      */
     public function index(Request $request)
     {
-        // Récupérer uniquement les commentaires locaux
+        // Optimiser les requêtes
         $comments = Comment::forMedia(
             $request->tmdb_id,
             $request->type
-        )->with(['user', 'replies.user'])
+        )->whereNull('parent_id')
+        ->with(['user:id,name', 'replies.user:id,name']) // Sélectionner uniquement les champs nécessaires
         ->latest()
         ->get();
 
-        // Ajouter des informations de débogage en développement
-        if (config('app.debug')) {
-            return response()->json([
-                'debug' => [
-                    'total_count' => $comments->count(),
-                ],
-                'comments' => $comments
-            ]);
-        }
-
-        return response()->json($comments);
+        // Mise en cache courte durée si nécessaire
+        return cache()->remember("comments_{$request->tmdb_id}_{$request->type}", 60, function() use ($comments) {
+            return response()->json($comments);
+        });
     }
 
     /**
@@ -43,30 +37,43 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'tmdb_id' => 'required|integer',
-            'type' => 'required|in:movie,tv',
-            'content' => 'required|string|max:1000',
-            'parent_id' => 'nullable|exists:comments,id'
-        ]);
+        try {
+            $validated = $request->validate([
+                'tmdb_id' => 'required|integer',
+                'type' => 'required|in:movie,tv',
+                'content' => 'required|string|max:1000',
+                'parent_id' => 'nullable|exists:comments,id'
+            ]);
 
-        $comment = Comment::create([
-            'user_id' => auth()->id(),
-            'tmdb_id' => $validated['tmdb_id'],
-            'type' => $validated['type'],
-            'content' => $validated['content'],
-            'parent_id' => $validated['parent_id'] ?? null
-        ]);
+            $comment = Comment::create([
+                'user_id' => auth()->id(),
+                'tmdb_id' => $validated['tmdb_id'],
+                'type' => $validated['type'],
+                'content' => $validated['content'],
+                'parent_id' => $validated['parent_id'] ?? null
+            ]);
 
-        // Important : charger les relations pour l'affichage dynamique
-        $comment->load(['user', 'replies.user']);
+            $comment->load(['user', 'replies.user']);
 
-        return response()->json([
-            'comment' => $comment,
-            'message' => 'Commentaire ajouté avec succès',
-            'status' => 'success'
-        ], 201);
+            return response()->json([
+                'comment' => $comment,
+                'message' => 'Commentaire ajouté avec succès',
+                'status' => 'success'
+            ], 201);
+
+        } catch (\Exception $e) {
+            // Log l'erreur
+            \Log::error('Erreur lors de l\'ajout du commentaire: ' . $e->getMessage());
+
+            // Retourner une réponse JSON même en cas d'erreur
+            return response()->json([
+                'message' => 'Une erreur est survenue',
+                'error' => $e->getMessage(),
+                'status' => 'error'
+            ], 500);
+        }
     }
+
     /**
      * Mettre à jour un commentaire
      */
@@ -90,9 +97,19 @@ class CommentController extends Controller
     {
         $this->authorize('delete', $comment);
 
+        // Si c'est un commentaire parent, supprimer aussi les réponses
+        if ($comment->parent_id === null) {
+            $comment->replies()->delete();
+        }
+
         $comment->delete();
 
-        return response()->json(['message' => 'Commentaire supprimé']);
+        return response()->json([
+            'message' => $comment->parent_id
+                ? 'Réponse supprimée'
+                : 'Commentaire et réponses supprimés',
+            'status' => 'success'
+        ]);
     }
 
     /**
@@ -100,6 +117,14 @@ class CommentController extends Controller
      */
     public function reply(Request $request, Comment $comment)
     {
+        // Vérifier que le commentaire est un parent
+        if ($comment->parent_id !== null) {
+            return response()->json([
+                'message' => 'Impossible de répondre à une réponse',
+                'status' => 'error'
+            ], 422);
+        }
+
         $validated = $request->validate([
             'content' => 'required|string|max:1000'
         ]);
@@ -114,6 +139,10 @@ class CommentController extends Controller
 
         $reply->load('user');
 
-        return response()->json($reply, 201);
+        return response()->json([
+            'reply' => $reply,
+            'message' => 'Réponse ajoutée avec succès',
+            'status' => 'success'
+        ], 201);
     }
 }
