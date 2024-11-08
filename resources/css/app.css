@@ -5,6 +5,17 @@
 @layer base {
     body {
         @apply bg-dark text-white;
+        background: linear-gradient(
+            170deg,
+            #000000 0%,
+            #1a0f00 20%,
+            #472600 40%,
+            #cc7000 50%,
+            #d97b00 75%,
+            #e68300 100%
+        );
+        background-size: 200% 100%;
+        animation: gradientAnimation 15s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
     }
 }
 
@@ -16,4 +27,10 @@
     .card {
         @apply bg-dark-light hover:bg-dark-lighter;
     }
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
