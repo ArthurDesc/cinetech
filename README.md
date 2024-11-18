@@ -56,8 +56,8 @@ Une application web permettant de découvrir et rechercher des films et séries 
 - v1.0.0
 
 ## Links
-[Laravel Doc](https://laravel.com/docs/11.x)
-[API TMDB](https://developer.themoviedb.org/reference/intro/getting-started)
-[Tailwind Doc](https://tailwindcss.com/docs/installation)
-[Download Composer](https://getcomposer.org/download/)
-[Download Node Js](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs)
+- [Laravel Doc](https://laravel.com/docs/11.x)
+- [API TMDB](https://developer.themoviedb.org/reference/intro/getting-started)
+- [Tailwind Doc](https://tailwindcss.com/docs/installation)
+- [Download Composer](https://getcomposer.org/download/)
+- [Download Node Js](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs)
