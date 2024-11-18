@@ -24,36 +24,36 @@ Une application web permettant de découvrir et rechercher des films et séries 
 
 
 ## 1. Cloner le projet
-bash
-git clone https://github.com/ArthurDesc/cinetech.git
-cd cinetech
+- bash
+- git clone https://github.com/ArthurDesc/cinetech.git
+- cd cinetech
 
 
 ## 2. Installation des dépendances
 
 ### Installation des dépendances PHP de base
-composer install
-npm install
+- composer install
+- npm install
 
 ### Installation de Laravel Breeze
-composer require laravel/breeze --dev
-php artisan breeze:install
+- composer require laravel/breeze --dev
+- php artisan breeze:install
 
 ### Installation des dépendances Node.js
-npm install
+- npm install
 
 ### Installation de Tailwind CSS
-npm install -D tailwindcss postcss autoprefixer
-npx tailwindcss init -p
+- npm install -D tailwindcss postcss autoprefixer
+- npx tailwindcss init -p
 
 ### Installation d'Embla Carousel
-npm install embla-carousel
+- npm install embla-carousel
 
 ## 3. Compilation des assets
-npm run build
+- npm run build
 
 ## Version
-v1.0.0
+- v1.0.0
 
 ## Links
 [Laravel Doc](https://laravel.com/docs/11.x)
