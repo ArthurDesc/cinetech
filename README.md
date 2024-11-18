@@ -22,38 +22,25 @@ Une application web permettant de découvrir et rechercher des films et séries 
 - Embla Carousel 8.3
 - Axios 1.6
 
+## Installation
 
-## 1. Cloner le projet
+### 1. Cloner le projet
 - git clone https://github.com/ArthurDesc/cinetech.git
 - cd cinetech
 
-
-## 2. Installation des dépendances
-
-### Installation des dépendances PHP de base
+### 2. Installation des dépendances
 - composer install
 - npm install
 
-### Installation de Laravel Breeze
-- composer require laravel/breeze --dev
-- php artisan breeze:install
-- Tape "blade" dans le terminal et appuie sur entrer
-- Tape "no" dans le terminal et appuie sur entrer
-- Tape "1" dans le terminal et appuie sur entrer
-
-
-### Installation de Tailwind CSS
-- npm install -D tailwindcss postcss autoprefixer
-- npx tailwindcss init -p
-
-### Installation d'Embla Carousel
-- npm install embla-carousel
-
-## 3. Compilation des assets
-- npm run build
-
-## 4. Configuration et structure
+### 3. Configuration
 - cp .env.example .env
+- Configurez votre base de données dans le fichier .env
+- Ajoutez votre clé API TMDB dans le fichier .env
+- php artisan key:generate
+- php artisan migrate
+
+### 4. Lancement du projet
+- php artisan serve & npm run dev
 
 ## Version
 - v1.0.0
@@ -61,6 +48,5 @@ Une application web permettant de découvrir et rechercher des films et séries 
 ## Links
 - [Laravel Doc](https://laravel.com/docs/11.x)
 - [API TMDB](https://developer.themoviedb.org/reference/intro/getting-started)
-- [Tailwind Doc](https://tailwindcss.com/docs/installation)
 - [Download Composer](https://getcomposer.org/download/)
 - [Download Node Js](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs)
