@@ -30,24 +30,24 @@ git clone https://github.com/ArthurDesc/cinetech.git
 cd cinetech
 
 
-### 2. Installation des dépendances
+# 2. Installation des dépendances
 
-# Installation des dépendances PHP de base
+### Installation des dépendances PHP de base
 composer install
 npm install
 
-# Installation de Laravel Breeze
+### Installation de Laravel Breeze
 composer require laravel/breeze --dev
 php artisan breeze:install
 
-# Installation des dépendances Node.js
+### Installation des dépendances Node.js
 npm install
 
-# Installation de Tailwind CSS
+### Installation de Tailwind CSS
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 
-# Installation d'Embla Carousel
+### Installation d'Embla Carousel
 npm install embla-carousel
 
 # Compilation des assets
