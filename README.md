@@ -24,7 +24,6 @@ Une application web permettant de découvrir et rechercher des films et séries 
 
 
 ## 1. Cloner le projet
-- bash
 - git clone https://github.com/ArthurDesc/cinetech.git
 - cd cinetech
 
@@ -38,9 +37,10 @@ Une application web permettant de découvrir et rechercher des films et séries 
 ### Installation de Laravel Breeze
 - composer require laravel/breeze --dev
 - php artisan breeze:install
+- Tape "blade" dans le terminal et appuie sur entrer
+- Tape "no" dans le terminal et appuie sur entrer
+- Tape "1" dans le terminal et appuie sur entrer
 
-### Installation des dépendances Node.js
-- npm install
 
 ### Installation de Tailwind CSS
 - npm install -D tailwindcss postcss autoprefixer
@@ -51,6 +51,9 @@ Une application web permettant de découvrir et rechercher des films et séries 
 
 ## 3. Compilation des assets
 - npm run build
+
+## 4. Configuration et structure
+- cp .env.example .env
 
 ## Version
 - v1.0.0
