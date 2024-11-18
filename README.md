@@ -22,7 +22,6 @@ Une application web permettant de découvrir et rechercher des films et séries 
 - Embla Carousel 8.3
 - Axios 1.6
 
-## Installation en Local
 
 ## 1. Cloner le projet
 bash
