@@ -13,7 +13,7 @@ Une application web permettant de découvrir et rechercher des films et séries 
 
 ## Technologies Utilisées
 
-- > Laravel 10
+- Laravel 10
 - MySQL
 - API TMDB
 - Tailwind CSS 3.1
@@ -24,13 +24,13 @@ Une application web permettant de découvrir et rechercher des films et séries 
 
 ## Installation en Local
 
-### 1. Cloner le projet
+## 1. Cloner le projet
 bash
 git clone https://github.com/ArthurDesc/cinetech.git
 cd cinetech
 
 
-# 2. Installation des dépendances
+## 2. Installation des dépendances
 
 ### Installation des dépendances PHP de base
 composer install
@@ -50,7 +50,7 @@ npx tailwindcss init -p
 ### Installation d'Embla Carousel
 npm install embla-carousel
 
-# Compilation des assets
+## 3. Compilation des assets
 npm run build
 
 ## Version
