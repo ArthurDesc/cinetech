@@ -53,11 +53,12 @@ npm install embla-carousel
 # Compilation des assets
 npm run build
 
-### 3. Configuration de l'environnement
-
-
 ## Version
 v1.0.0
 
-## Docs
->>[Laravel Doc](https://laravel.com/docs/11.x)
+## Links
+[Laravel Doc](https://laravel.com/docs/11.x)
+[API TMDB](https://developer.themoviedb.org/reference/intro/getting-started)
+[Tailwind Doc](https://tailwindcss.com/docs/installation)
+[Download Composer](https://getcomposer.org/download/)
+[Download Node Js](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs)
