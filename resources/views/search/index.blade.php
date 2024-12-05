@@ -31,7 +31,7 @@
                         <x-tv-shows.show-card :show="$result" />
                     @endif
                 @empty
-                    <p class="text-gray-400 col-span-full text-center">
+                    <p class="text-white col-span-full text-center">
                         Aucun résultat trouvé pour "{{ request('query') }}"
                     </p>
                 @endforelse

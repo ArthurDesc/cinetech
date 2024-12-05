@@ -9,7 +9,7 @@
                 @forelse($movieFavorites as $movie)
                     <x-movie-card :movie="$movie" />
                 @empty
-                    <p class="text-gray-400 col-span-full">Aucun film en favoris</p>
+                    <p class="text-white col-span-full">Aucun film en favoris</p>
                 @endforelse
             </div>
         </section>
@@ -21,7 +21,7 @@
                 @forelse($tvFavorites as $show)
                     <x-tv-shows.show-card :show="$show" />
                 @empty
-                    <p class="text-gray-400 col-span-full">Aucune série en favoris</p>
+                    <p class="text-white col-span-full">Aucune série en favoris</p>
                 @endforelse
             </div>
         </section>

@@ -19,7 +19,7 @@
                 <h1 class="text-3xl font-bold mb-4 text-white">
                     {{ $movie['title'] }}
                 </h1>
-                <p class="text-gray-400 mb-4">
+                <p class="text-white mb-4">
                     {{ $movie['overview'] }}
                 </p>
 
@@ -58,7 +58,7 @@
                                      alt="{{ $actor['name'] }}"
                                      class="w-full rounded-lg mb-2">
                                 <p class="text-gray-300">{{ $actor['name'] }}</p>
-                                <p class="text-gray-400 text-sm">{{ $actor['character'] }}</p>
+                                <p class="text-white text-sm">{{ $actor['character'] }}</p>
                             </div>
                         @endforeach
                     </div>

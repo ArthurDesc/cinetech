@@ -26,10 +26,10 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('movies.index')" :active="request()->routeIs('movies.index')" class="text-gray-400 hover:text-primary-500">
+                    <x-nav-link :href="route('movies.index')" :active="request()->routeIs('movies.index')" class="text-white hover:text-primary-500">
                         Films
                     </x-nav-link>
-                    <x-nav-link :href="route('tvshows.index')" :active="request()->routeIs('tvshows.index')" class="text-gray-400 hover:text-primary-500">
+                    <x-nav-link :href="route('tvshows.index')" :active="request()->routeIs('tvshows.index')" class="text-white hover:text-primary-500">
                         Séries
                     </x-nav-link>
                 </div>
@@ -40,13 +40,13 @@
                     <div class="relative">
                         <input type="text" name="query" placeholder="Rechercher un film ou une série..."
                             value="{{ request('query') }}"
-                            class="w-full px-4 py-2 bg-dark text-gray-400 rounded-lg
+                            class="w-full px-4 py-2 bg-dark text-white rounded-lg
                                       border border-dark-lighter focus:outline-none
                                       focus:border-primary-500 focus:ring-1 focus:ring-primary-500">
 
                         <button type="submit"
                             class="absolute right-2 top-1/2 -translate-y-1/2
-                                       text-gray-400 hover:text-primary-500">
+                                       text-white hover:text-primary-500">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -63,7 +63,7 @@
                 @auth
                     {{-- Icône Favoris avec badge --}}
                     <a href="{{ route('favorites.index') }}"
-                        class="relative group hidden sm:flex items-center hover:text-primary-500 transition-colors duration-200 {{ request()->routeIs('favorites.index') ? 'text-primary-500' : 'text-gray-400' }}">
+                        class="relative group hidden sm:flex items-center hover:text-primary-500 transition-colors duration-200 {{ request()->routeIs('favorites.index') ? 'text-primary-500' : 'text-white' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
                             fill="{{ request()->routeIs('favorites.index') ? 'currentColor' : 'none' }}" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -78,7 +78,7 @@
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 <button
-                                    class="inline-flex items-center px-3 py-2 border border-dark-lighter text-sm leading-4 font-medium rounded-md text-gray-400 bg-dark hover:text-primary-500 focus:outline-none transition ease-in-out duration-150">
+                                    class="inline-flex items-center px-3 py-2 border border-dark-lighter text-sm leading-4 font-medium rounded-md text-white bg-dark hover:text-primary-500 focus:outline-none transition ease-in-out duration-150">
                                     <div>{{ Auth::user()->name }}</div>
                                     <div class="ms-1">
                                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +94,7 @@
                             <x-slot name="content">
                                 <div class="bg-dark-light border border-dark-lighter rounded-md shadow-lg">
                                     <x-dropdown-link :href="route('profile.edit')"
-                                        class="text-gray-400 hover:text-primary-500 hover:bg-dark-lighter">
+                                        class="text-white hover:text-primary-500 hover:bg-dark-lighter">
                                         {{ __('Profile') }}
                                     </x-dropdown-link>
 
@@ -102,7 +102,7 @@
                                         @csrf
                                         <x-dropdown-link :href="route('logout')"
                                             onclick="event.preventDefault(); this.closest('form').submit();"
-                                            class="text-gray-400 hover:text-primary-500 hover:bg-dark-lighter">
+                                            class="text-white hover:text-primary-500 hover:bg-dark-lighter">
                                             {{ __('Log Out') }}
                                         </x-dropdown-link>
                                     </form>
@@ -114,7 +114,7 @@
                     {{-- Boutons Connexion/Inscription --}}
                     <div class="hidden sm:flex sm:items-center space-x-4">
                         <a href="{{ route('login') }}"
-                            class="text-gray-400 hover:text-primary-500 px-3 py-2 rounded-md text-sm font-medium">
+                            class="text-white hover:text-primary-500 px-3 py-2 rounded-md text-sm font-medium">
                             Connexion
                         </a>
                         <a href="{{ route('register') }}"
@@ -130,7 +130,7 @@
                 @auth
                     {{-- Icône Favoris Mobile --}}
                     <a href="{{ route('favorites.index') }}"
-                        class="relative flex items-center text-gray-400 hover:text-primary-500 transition-colors duration-200 {{ request()->routeIs('favorites.index') ? 'text-primary-500' : '' }}">
+                        class="relative flex items-center text-white hover:text-primary-500 transition-colors duration-200 {{ request()->routeIs('favorites.index') ? 'text-primary-500' : '' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
                             fill="{{ request()->routeIs('favorites.index') ? 'currentColor' : 'none' }}"
                             viewBox="0 0 24 24" stroke="currentColor">
@@ -141,7 +141,7 @@
                 @endauth
 
                 <button @click="$dispatch('toggle-mobile-menu')"
-                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-primary-500 hover:bg-dark-lighter focus:outline-none transition duration-150 ease-in-out">
+                    class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-primary-500 hover:bg-dark-lighter focus:outline-none transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>

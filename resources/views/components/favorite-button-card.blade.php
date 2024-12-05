@@ -29,7 +29,7 @@
     >
         <svg xmlns="http://www.w3.org/2000/svg"
              class="h-5 w-5 transition-colors duration-200"
-             :class="isFavorite ? 'text-primary-500' : 'text-gray-400'"
+             :class="isFavorite ? 'text-primary-500' : 'text-white'"
              :fill="isFavorite ? 'currentColor' : 'none'"
              viewBox="0 0 24 24"
              stroke="currentColor">
@@ -44,7 +44,7 @@
        @click.stop
        class="absolute bottom-2 right-2 p-2 rounded-full bg-dark-lighter hover:bg-dark-light transition-colors duration-200">
         <svg xmlns="http://www.w3.org/2000/svg"
-             class="h-5 w-5 text-gray-400"
+             class="h-5 w-5 text-white"
              fill="none"
              viewBox="0 0 24 24"
              stroke="currentColor">

@@ -183,7 +183,7 @@
             </form>
         @else
             <div class="text-center py-4 bg-dark-lighter rounded-lg">
-                <p class="text-gray-400">
+                <p class="text-white">
                     <a href="{{ route('login') }}" class="text-primary-500 hover:text-primary-400">Connectez-vous</a>
                     pour laisser un commentaire
                 </p>
@@ -191,7 +191,7 @@
         @endauth
 
         {{-- Nombre total de commentaires --}}
-        <div class="mb-6 text-sm text-gray-400">
+        <div class="mb-6 text-sm text-white">
             <span>Nombre de commentaires: <span x-text="comments.length"></span></span>
         </div>
 
@@ -204,7 +204,7 @@
                 <div class="flex items-center justify-between mb-2">
                     <div class="flex items-center gap-2">
                         <span class="text-primary-500 font-semibold" x-text="comment.user.name"></span>
-                        <span class="text-gray-400 text-sm"
+                        <span class="text-white text-sm"
                               x-text="new Date(comment.created_at).toLocaleDateString()">
                         </span>
                     </div>
@@ -249,7 +249,7 @@
                             <div class="flex justify-end gap-2">
                                 <button type="button"
                                         @click="replyingTo = null"
-                                        class="px-3 py-1 text-sm text-gray-400 hover:text-gray-300">
+                                        class="px-3 py-1 text-sm text-white hover:text-gray-300">
                                     Annuler
                                 </button>
                                 <button type="submit"
@@ -272,7 +272,7 @@
                                 <div class="flex items-center justify-between mb-1">
                                     <div class="flex items-center gap-2">
                                         <span class="text-primary-500" x-text="reply.user.name"></span>
-                                        <span class="text-gray-400 text-sm"
+                                        <span class="text-white text-sm"
                                               x-text="new Date(reply.created_at).toLocaleDateString()">
                                         </span>
                                     </div>

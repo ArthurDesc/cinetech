@@ -20,42 +20,42 @@
                 <h1 class="text-3xl font-bold mb-4 text-white">
                     {{ $show['name'] }}
                 </h1>
-                <p class="text-gray-400 mb-4">
+                <p class="text-white mb-4">
                     {{ $show['overview'] }}
                 </p>
 
                 {{-- Informations supplémentaires --}}
                 <div class="mb-4 space-y-2">
-                    <p class="text-gray-300">
+                    <p class="text-white">
                         Première diffusion : <span class="text-primary-500">{{ $show['first_air_date'] }}</span>
                     </p>
-                    <p class="text-gray-300">
+                    <p class="text-white">
                         Note : <span class="text-primary-500">{{ $show['vote_average'] }}/10</span>
                     </p>
-                    <p class="text-gray-300">
+                    <p class="text-white">
                         Créateur : <span class="text-primary-500">
                             {{ collect($show['created_by'])->pluck('name')->join(', ') ?: 'Non disponible' }}
                         </span>
                     </p>
-                    <p class="text-gray-300">
+                    <p class="text-white">
                         Genres : <span class="text-primary-500">
                             {{ collect($show['genres'])->pluck('name')->join(', ') }}
                         </span>
                     </p>
-                    <p class="text-gray-300">
+                    <p class="text-white">
                         Pays d'origine : <span class="text-primary-500">
                             {{ collect($show['origin_country'])->join(', ') }}
                         </span>
                     </p>
-                    <p class="text-gray-300">
+                    <p class="text-white">
                         Chaîne de diffusion : <span class="text-primary-500">
                             {{ collect($show['networks'])->pluck('name')->join(', ') }}
                         </span>
                     </p>
-                    <p class="text-gray-300">
+                    <p class="text-white">
                         Nombre de saisons : <span class="text-primary-500">{{ $show['number_of_seasons'] }}</span>
                     </p>
-                    <p class="text-gray-300">
+                    <p class="text-white">
                         Nombre d'épisodes : <span class="text-primary-500">{{ $show['number_of_episodes'] }}</span>
                     </p>
                 </div>
@@ -69,12 +69,12 @@
                                 <img src="{{ $actor['profile_url'] }}"
                                      alt="{{ $actor['name'] }}"
                                      class="w-full h-48 object-cover rounded-lg mb-2"
-                                     onerror="this.src='{{ asset('images/placeholder-actor.jpg') }}'">
-                                <p class="text-gray-300">{{ $actor['name'] }}</p>
-                                <p class="text-gray-400 text-sm">{{ $actor['character'] }}</p>
+                                     onerror='this.src="{{ asset('images/placeholder-actor.jpg') }}"'>
+                                <p class="text-white">{{ $actor['name'] }}</p>
+                                <p class="text-white text-sm">{{ $actor['character'] }}</p>
                             </div>
                         @empty
-                            <p class="text-gray-400 col-span-5">Aucun acteur disponible</p>
+                            <p class="text-white col-span-5">Aucun acteur disponible</p>
                         @endforelse
                     </div>
                 </div>
