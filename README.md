@@ -1,15 +1,81 @@
-# Cinetech - Movie and TV Series Application :rocket:
+# Cinetech - Application de Films et Séries
 
-A web application that allows users to discover and search for movies and TV shows using the TMDB API. Users can create accounts, manage their favorites, and comment on content.
+## Description
+Application web permettant de découvrir et gérer une liste de films et séries en utilisant l'API TMDB.
 
-## Prerequisites
-
-- PHP 8.1 or higher
+## Prérequis
+- PHP >= 8.1
 - Composer
-- Node.js and NPM
-- MySQL 5.7 or higher
-- Git
-- TMDB account and API key
+- MySQL
+- Node.js & NPM
+
+## Installation
+
+1. Cloner le projet
+```bash
+git clone <votre-repo>
+cd cinetech
+```
+
+2. Installer les dépendances
+```bash
+composer install
+npm install
+```
+
+3. Configurer l'environnement
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+4. Configuration de la base de données
+- Créer une base de données MySQL nommée `cinetech`
+- Configurer les accès dans le fichier `.env` :
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=cinetech
+DB_USERNAME=root
+DB_PASSWORD=root
+```
+
+5. Migrer la base de données
+```bash
+php artisan migrate
+```
+
+6. Compiler les assets
+```bash
+npm run dev
+```
+
+7. Lancer le serveur
+```bash
+php artisan serve
+```
+
+## Accès
+- Application : http://127.0.0.1:8000
+- Base de données : 
+  - Host : 127.0.0.1
+  - Port : 3306
+  - Utilisateur : root
+  - Mot de passe : root
+
+## Fonctionnalités
+- Affichage des films et séries populaires
+- Carousel des films tendances
+- Système de favoris
+- Recherche de films et séries
+- Système d'authentification
+- Interface responsive
+
+## Notes techniques
+- L'application utilise l'API TMDB pour récupérer les données des films et séries
+- La vérification SSL est désactivée en développement pour les appels API
+- Pour la production, il est recommandé de configurer correctement les certificats SSL
 
 ## Technologies Used
 
@@ -21,26 +87,6 @@ A web application that allows users to discover and search for movies and TV sho
 - Vite 5.0
 - Embla Carousel 8.3
 - Axios 1.6
-
-## Installation
-
-### 1. Clone the project
-- `git clone https://github.com/ArthurDesc/cinetech.git`
-- `cd cinetech`
-
-### 2. Install dependencies
-- `composer install`
-- `npm install`
-
-### 3. Configuration
-- `cp .env.example .env`
-- Configure your database in the `.env` file
-- Add your TMDB API key in the `.env` file
-- `php artisan key:generate`
-- `php artisan migrate`
-
-### 4. Run the project
-- `php artisan serve & npm run dev`
 
 ## Version
 - v1.0.0

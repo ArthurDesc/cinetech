@@ -1,0 +1,73 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+Il s'agit d'un projet que je veux présenter pour mon examen, je veux donc que mon projet soit réailser de manière simple et concrète de sorte à ce que je n'ai pas des choses inutiles dans mon code et ma structure que je serai obligé de presnter voici ce qui est demandé : 
+
+1. Front-end (activité type 1)
+ Interface & accessibilité :
+ Site 100% responsive (desktop / tablette / mobile)
+
+ Navigation clavier fonctionnelle
+
+ Texte lisible, contrasté, et hiérarchie visuelle claire
+
+ aria-* ou alt sur les éléments importants (pour l’accessibilité)
+
+ Charte graphique documentée (couleurs, polices, composants)
+
+Pages obligatoires :
+ Page d’accueil
+
+ Page de résultats de recherche
+
+ Page de détails d’un film/série
+
+ Page de connexion / inscription
+
+ Page favoris de l’utilisateur
+
+ Page "laisser un avis"
+
+Interaction :
+ Appels API TMDB avec gestion des erreurs
+
+ Affichage dynamique du contenu (JS ou Blade AJAX)
+
+ Ajout aux favoris (via bouton)
+
+ Laisser un avis (formulaire + enregistrement DB)
+
+ 2. Back-end (activité type 2)
+Base de données :
+ Création d’une base MySQL/PostgreSQL avec :
+
+Table users
+
+Table favorites
+
+Table reviews
+
+ Script de création SQL exportable
+
+ Diagramme EER (conceptuel + logique)
+
+Sécurité :
+ Protection CSRF
+
+ Validation côté serveur de tous les formulaires
+
+ Gestion des rôles (au moins "user" et "admin")
+
+ Protection des routes selon les rôles
+
+Composants :
+ Gestion des favoris (ajout/suppression)
+
+ Création/édition d’avis (avec modération si possible)
+
+ Tableau de bord admin simple (liste des utilisateurs/avis)
+
+
+

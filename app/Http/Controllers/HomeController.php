@@ -17,10 +17,11 @@ class HomeController extends Controller
     private function getCarouselMovies()
     {
         // Récupérer les films tendance pour le carousel
-        $trendingMovies = Http::get("{$this->baseUrl}/trending/movie/week", [
-            'api_key' => $this->apiKey,
-            'language' => 'fr-FR',
-        ])->json()['results'];
+        $trendingMovies = Http::withOptions(['verify' => false])
+            ->get("{$this->baseUrl}/trending/movie/week", [
+                'api_key' => $this->apiKey,
+                'language' => 'fr-FR',
+            ])->json()['results'];
 
         // Formater les données pour le carousel
         $carouselMovies = array_slice($trendingMovies, 0, 5);
@@ -36,17 +37,19 @@ class HomeController extends Controller
 
     public function index()
     {
-        $popularMovies = Http::get("{$this->baseUrl}/movie/popular", [
-            'api_key' => $this->apiKey,
-            'language' => 'fr-FR',
-            'page' => 1
-        ])->json()['results'];
+        $popularMovies = Http::withOptions(['verify' => false])
+            ->get("{$this->baseUrl}/movie/popular", [
+                'api_key' => $this->apiKey,
+                'language' => 'fr-FR',
+                'page' => 1
+            ])->json()['results'];
 
-        $popularShows = Http::get("{$this->baseUrl}/tv/popular", [
-            'api_key' => $this->apiKey,
-            'language' => 'fr-FR',
-            'page' => 1
-        ])->json()['results'];
+        $popularShows = Http::withOptions(['verify' => false])
+            ->get("{$this->baseUrl}/tv/popular", [
+                'api_key' => $this->apiKey,
+                'language' => 'fr-FR',
+                'page' => 1
+            ])->json()['results'];
 
         // Limiter à 4 éléments chacun
         $popularMovies = array_slice($popularMovies, 0, 4);

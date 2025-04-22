@@ -5,9 +5,6 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
-// Définir le chemin vers le dossier cinetech_core
-$coreDirectory = realpath(__DIR__.'/../../cinetech_core');
-
 /*
 |--------------------------------------------------------------------------
 | Check If The Application Is Under Maintenance
@@ -19,7 +16,7 @@ $coreDirectory = realpath(__DIR__.'/../../cinetech_core');
 |
 */
 
-if (file_exists($maintenance = $coreDirectory.'/storage/framework/maintenance.php')) {
+if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
     require $maintenance;
 }
 
@@ -34,7 +31,7 @@ if (file_exists($maintenance = $coreDirectory.'/storage/framework/maintenance.ph
 |
 */
 
-require $coreDirectory.'/vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +44,7 @@ require $coreDirectory.'/vendor/autoload.php';
 |
 */
 
-$app = require_once $coreDirectory.'/bootstrap/app.php';
+$app = require_once __DIR__.'/../bootstrap/app.php';
 
 $kernel = $app->make(Kernel::class);
 
