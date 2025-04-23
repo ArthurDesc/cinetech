@@ -93,17 +93,13 @@
 
                             <x-slot name="content">
                                 <div class="bg-dark-light border border-dark-lighter rounded-md shadow-lg">
-                                    <x-dropdown-link :href="route('profile.edit')"
-                                        class="text-white hover:text-primary-500 hover:bg-dark-lighter">
-                                        {{ __('Profile') }}
-                                    </x-dropdown-link>
 
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
                                         <x-dropdown-link :href="route('logout')"
                                             onclick="event.preventDefault(); this.closest('form').submit();"
                                             class="text-white hover:text-primary-500 hover:bg-dark-lighter">
-                                            {{ __('Log Out') }}
+                                            {{ __('Déconnexion') }}
                                         </x-dropdown-link>
                                     </form>
                                 </div>

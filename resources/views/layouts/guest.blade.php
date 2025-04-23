@@ -16,7 +16,7 @@
     </head>
     <body class="font-sans antialiased bg-gray-900 text-white">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
-            <div>
+            <div class="mt-6">
                 <a href="/" class="flex items-center">
                     <x-application-logo class="w-20 h-20 fill-current text-red-500" />
                 </a>
