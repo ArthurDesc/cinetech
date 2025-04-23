@@ -15,9 +15,9 @@
             <form method="POST" action="{{ route('register') }}">
                 @csrf
 
-                <!-- Nom -->
+                <!-- Pseudo -->
                 <div class="mt-4">
-                    <x-input-label for="name" :value="__('Nom')" class="text-white" />
+                    <x-input-label for="name" :value="__('Pseudo')" class="text-white" />
                     <x-text-input id="name" class="block mt-1 w-full bg-gray-700 border border-gray-600 text-white pl-3 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                 </div>
