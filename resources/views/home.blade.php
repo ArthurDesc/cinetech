@@ -84,7 +84,7 @@
             <section>
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-2xl font-bold text-white">Films Populaires</h2>
-                    <a href="{{ route('movies.index') }}" class="text-primary-500 hover:text-primary-400">
+                    <a href="{{ route('movies.index') }}" class="text-white">
                         Voir plus
                     </a>
                 </div>
@@ -99,7 +99,7 @@
             <section>
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-2xl font-bold text-white">Séries Populaires</h2>
-                    <a href="{{ route('tvshows.index') }}" class="text-primary-500 hover:text-primary-400">
+                    <a href="{{ route('tvshows.index') }}" class="text-white">
                         Voir plus
                     </a>
                 </div>
