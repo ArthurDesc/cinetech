@@ -11,12 +11,20 @@
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4 px-4">
                 <a href="{{ route('movies.index') }}"
-                   class="w-full sm:w-auto text-center bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg transition duration-300">
-                    Explorer les Films
+                   class="relative group border-none bg-transparent p-0 outline-none cursor-pointer font-mono font-light uppercase text-sm w-full sm:w-auto text-center">
+                    <span class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-20 rounded-lg transform translate-y-0.5 transition duration-[600ms] ease-[cubic-bezier(0.3,0.7,0.4,1)] group-hover:translate-y-1 group-hover:duration-[250ms] group-active:translate-y-px"></span>
+                    <span class="absolute top-0 left-0 w-full h-full rounded-lg bg-gradient-to-l from-[#ea580c] via-[#cc7000] to-[#a95013]"></span>
+                    <span class="relative flex items-center justify-center py-2 px-4 text-base text-white rounded-lg transform -translate-y-1 bg-gradient-to-r from-[#ea580c] via-[#cc7000] to-[#a95013] gap-3 transition duration-[600ms] ease-[cubic-bezier(0.3,0.7,0.4,1)] group-hover:-translate-y-1.5 group-hover:duration-[250ms] group-active:-translate-y-0.5 brightness-100 group-hover:brightness-110 select-none">
+                        Explorer les Films
+                    </span>
                 </a>
                 <a href="{{ route('tvshows.index') }}"
-                   class="w-full sm:w-auto text-center bg-dark-light hover:bg-dark-lighter text-white px-6 py-3 rounded-lg transition duration-300">
-                    Explorer les Séries
+                   class="relative group border-none bg-transparent p-0 outline-none cursor-pointer font-mono font-light uppercase text-sm w-full sm:w-auto text-center">
+                    <span class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-20 rounded-lg transform translate-y-0.5 transition duration-[600ms] ease-[cubic-bezier(0.3,0.7,0.4,1)] group-hover:translate-y-1 group-hover:duration-[250ms] group-active:translate-y-px"></span>
+                    <span class="absolute top-0 left-0 w-full h-full rounded-lg bg-gradient-to-l from-[#232526] via-[#181a1b] to-[#0a0a0a]"></span>
+                    <span class="relative flex items-center justify-center py-2 px-4 text-base text-white rounded-lg transform -translate-y-1 bg-gradient-to-r from-[#232526] via-[#181a1b] to-[#0a0a0a] gap-3 transition duration-[600ms] ease-[cubic-bezier(0.3,0.7,0.4,1)] group-hover:-translate-y-1.5 group-hover:duration-[250ms] group-active:-translate-y-0.5 brightness-100 group-hover:brightness-110 select-none">
+                        Explorer les Séries
+                    </span>
                 </a>
             </div>
         </section>
