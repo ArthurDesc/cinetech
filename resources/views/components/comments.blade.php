@@ -14,10 +14,13 @@
             init() {
                 this.isLoading = true;
 
-                fetchWithRetry(
-                    '{{ route('comments.index') }}?tmdb_id={{ $tmdbId }}&type={{ $type }}',
-                    {}
-                )
+                fetch('{{ route('comments.index') }}?tmdb_id={{ $tmdbId }}&type={{ $type }}', {
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => response.json())
                 .then(data => {
                     this.comments = data.comments || data;
                     this.isLoading = false;

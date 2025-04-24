@@ -19,8 +19,10 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('home') }}">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-7 w-auto">
+                    <a href="{{ route('home') }}" class="flex items-center">
+                        <img src="{{ asset('images/logo.png') }}" alt="Cinetech" class="h-7 w-auto"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <span class="text-primary-500 font-bold text-xl ml-2 hidden">Cinetech</span>
                     </a>
                 </div>
 
@@ -61,17 +63,22 @@
                 {{-- Barre de recherche (si vous en avez une) --}}
 
                 @auth
-                    {{-- Icône Favoris avec badge --}}
-                    <a href="{{ route('favorites.index') }}"
-                        class="relative group hidden sm:flex items-center hover:text-primary-500 transition-colors duration-200 {{ request()->routeIs('favorites.index') ? 'text-primary-500' : 'text-white' }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
-                            fill="{{ request()->routeIs('favorites.index') ? 'currentColor' : 'none' }}" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                        </svg>
-                        <span class="hidden group-hover:block ml-2 text-sm">Favoris</span>
-                    </a>
+                    {{-- Nouveau bouton Favoris animé (desktop/tablette uniquement) --}}
+                    <button
+                        @click="window.location='{{ route('favorites.index') }}'"
+                        aria-label="Aller à mes favoris"
+                        type="button"
+                        class="group items-center justify-start w-11 h-11 bg-gradient-to-r from-primary-600 to-primary-500 rounded-full cursor-pointer relative overflow-hidden transition-all duration-200 shadow-md md:hover:w-32 hover:rounded-[50px] hover:shadow-lg focus:outline-none active:translate-x-1 active:translate-y-1 {{ request()->routeIs('favorites.index') ? 'ring-2 ring-primary-500' : '' }} hidden sm:flex"
+                    >
+                        <div class="flex items-center justify-center w-full transition-all duration-300 group-hover:justify-start group-hover:px-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white group-hover:animate-pulse" fill="{{ request()->routeIs('favorites.index') ? 'currentColor' : 'none' }}" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            </svg>
+                        </div>
+                        <div class="absolute right-5 transform translate-x-full opacity-0 text-white text-sm font-medium transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 hidden md:block">
+                            Favoris
+                        </div>
+                    </button>
 
                     {{-- Dropdown Utilisateur --}}
                     <div class="hidden sm:flex sm:items-center">
@@ -124,9 +131,10 @@
             <!-- Hamburger Button -->
             <div class="flex items-center sm:hidden space-x-4">
                 @auth
-                    {{-- Icône Favoris Mobile --}}
+                    {{-- Icône Favoris Mobile (mobile uniquement) --}}
                     <a href="{{ route('favorites.index') }}"
-                        class="relative flex items-center text-white hover:text-primary-500 transition-colors duration-200 {{ request()->routeIs('favorites.index') ? 'text-primary-500' : '' }}">
+                        class="relative flex items-center text-white hover:text-primary-500 transition-colors duration-200 {{ request()->routeIs('favorites.index') ? 'text-primary-500' : '' }} sm:hidden"
+                        aria-label="Aller à mes favoris">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
                             fill="{{ request()->routeIs('favorites.index') ? 'currentColor' : 'none' }}"
                             viewBox="0 0 24 24" stroke="currentColor">
