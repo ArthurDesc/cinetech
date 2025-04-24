@@ -22,13 +22,15 @@
                     <x-text-input id="email" class="block mt-1 w-full bg-gray-700 border border-gray-600 text-white pl-3 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" aria-label="Adresse e-mail" />
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
-                <div class="flex flex-col sm:flex-row items-center justify-between mt-6 gap-4">
+                <div class="mt-6">
+                    <button type="submit" class="w-[60%] mx-auto h-[50px] my-3 flex items-center justify-center rounded-xl cursor-pointer relative overflow-hidden transition-all duration-500 ease-in-out shadow-lg hover:scale-105 hover:shadow-2xl before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-orange-700 before:to-orange-600 before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-xl hover:before:left-0 text-white font-semibold text-lg bg-gray-700">
+                        {{ __('Confirmer') }}
+                    </button>
+                </div>
+                <div class="mt-4 text-center">
                     <a class="text-sm text-gray-300 hover:text-white hover:underline rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500" href="{{ route('login') }}">
                         {{ __('Retour à la connexion') }}
                     </a>
-                    <button type="submit" class="w-full sm:w-auto px-4 py-2 bg-orange-600 border border-transparent rounded-lg font-semibold text-base text-white tracking-widest hover:bg-orange-700 focus:bg-orange-700 active:bg-orange-900 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition ease-in-out duration-150 shadow-md">
-                        {{ __('Envoyer le lien de réinitialisation') }}
-                    </button>
                 </div>
             </form>
         </div>
