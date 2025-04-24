@@ -14,7 +14,7 @@
     <!-- Spotlight effect only -->
     <div
         class="pointer-events-none absolute inset-0 z-0 transition-all duration-300"
-        :style="`background: radial-gradient(300px circle at ${x}px ${y}px, rgba(255,140,0,0.18), transparent 80%)`"
+        :style="`background: radial-gradient(300px circle at ${x}px ${y}px, rgba(255,140,0,0.12), transparent 80%)`"
     ></div>
     <!-- Slot content -->
     <div class="relative z-20">
