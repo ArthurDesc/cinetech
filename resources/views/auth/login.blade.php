@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
-        <x-magic-card class="w-full sm:max-w-md mt-6 px-4 py-8 bg-gray-800 shadow-2xl border border-gray-700 rounded-2xl relative mx-2">
+        <x-magic-card class="w-full sm:max-w-md mt-6 px-4 py-8 bg-black shadow-2xl border border-gray-500 ring-2 ring-orange-700/30 rounded-2xl relative mx-2">
             <!-- Header sécurisé -->
             <div class="flex flex-col items-center mb-4">
                 <div class="bg-orange-600 rounded-full p-2 mb-2 shadow-md flex items-center justify-center" style="width:44px;height:44px;">
@@ -30,7 +30,7 @@
                     <x-input-label for="password" :value="__('Mot de passe')" class="text-white" />
                     <div class="flex items-center relative">
                         <x-text-input id="password" class="block mt-1 w-full bg-gray-700 border border-gray-600 text-white pl-3 pr-10 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition" type="password" name="password" required autocomplete="current-password" />
-                        <button type="button" aria-label="Afficher ou masquer le mot de passe" onclick="togglePasswordVisibility('password', this)" class="absolute right-3 top-1/2 -translate-y-1/2 p-0 m-0 bg-transparent border-0 text-gray-400 focus:outline-none flex items-center justify-center h-6 w-6">
+                        <button type="button" aria-label="Afficher ou masquer le mot de passe" onclick="togglePasswordVisibility('password', this)" class="absolute right-3 top-1/2 -translate-y-1/2 p-0 m-0 bg-gray-700 border-0 text-gray-400 focus:outline-none flex items-center justify-center h-6 w-6">
                             <span class="eye-open">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
@@ -55,21 +55,26 @@
                     </label>
                 </div>
 
-                <div class="flex flex-col sm:flex-row items-center justify-between mt-6 gap-4">
-                    @if (Route::has('password.request'))
-                    <a class="text-sm text-gray-300 hover:text-white hover:underline rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500" href="{{ route('password.request') }}">
-                        {{ __('Mot de passe oublié ?') }}
-                    </a>
-                    @endif
-
-                    <button type="submit" class="w-full sm:w-auto px-4 py-2 bg-red-600 border border-transparent rounded-lg font-semibold text-base text-white tracking-widest hover:bg-red-700 focus:bg-red-700 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition ease-in-out duration-150 shadow-md">
-                        {{ __('Se connecter') }}
+                <!-- Bouton connexion full width -->
+                <div class="mt-6">
+                    <button type="submit" class="w-[60%] mx-auto h-[50px] my-3 flex items-center justify-center rounded-xl cursor-pointer relative overflow-hidden transition-all duration-500 ease-in-out shadow-lg hover:scale-105 hover:shadow-2xl before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-orange-700 before:to-orange-600 before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-xl hover:before:left-0 text-white font-semibold text-lg bg-gray-700">
+                        Se connecter
                     </button>
                 </div>
+
+                <!-- Liens mot de passe oublié + créer un compte -->
+                <div class="flex flex-col sm:flex-row items-center justify-center mt-6 gap-2 sm:gap-4 w-full">
+                    <div class="flex flex-row items-center justify-center w-full">
+                        @if (Route::has('password.request'))
+                            <a class="text-sm text-gray-300 hover:text-white hover:underline rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 px-2" href="{{ route('password.request') }}">
+                                {{ __('Mot de passe oublié ?') }}
+                            </a>
+                        @endif
+                        <span class="inline-block h-5 border-l border-white mx-2"></span>
+                        <a href="{{ route('register') }}" class="text-sm text-red-400 hover:underline px-2">Créer un compte</a>
+                    </div>
+                </div>
             </form>
-            <div class="text-center mt-6">
-                <a href="{{ route('register') }}" class="text-base text-red-400 hover:underline">Créer un compte</a>
-            </div>
         </x-magic-card>
     </div>
     <script>

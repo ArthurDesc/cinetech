@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
-        <x-magic-card class="w-full sm:max-w-md mt-6 px-4 py-8 bg-gray-800 shadow-2xl border border-gray-700 rounded-2xl relative mx-2">
+        <x-magic-card class="w-full sm:max-w-md mt-6 px-4 py-8 bg-black shadow-2xl border border-gray-700 rounded-2xl relative mx-2">
             <!-- Header sécurisé -->
             <div class="flex flex-col items-center mb-4">
                 <div class="bg-orange-600 rounded-full p-2 mb-2 shadow-md flex items-center justify-center" style="width:44px;height:44px;">
