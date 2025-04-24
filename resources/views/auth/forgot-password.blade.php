@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
-        <div class="w-full sm:max-w-md mt-6 px-4 py-8 bg-dark-light shadow-2xl border border-dark-lighter rounded-2xl relative mx-2">
+        <div class="w-full sm:max-w-md mt-6 px-4 py-8 bg-gray-800 shadow-2xl border border-gray-700 rounded-2xl relative mx-2">
             <!-- Header illustré -->
             <div class="flex flex-col items-center mb-4">
                 <div class="bg-orange-600 rounded-full p-2 mb-2 shadow-md flex items-center justify-center" style="width:44px;height:44px;">
@@ -11,7 +11,7 @@
                 <h2 class="text-3xl font-bold text-center text-white mb-1">{{ __('Mot de passe oublié ?') }}</h2>
                 <p class="text-center text-gray-300 text-sm mt-1 max-w-xs">{{ __('Saisis ton adresse e-mail pour recevoir un lien de réinitialisation de mot de passe.') }}</p>
             </div>
-            <div class="border-b border-dark-lighter mb-6"></div>
+            <div class="border-b border-gray-700 mb-6"></div>
             <!-- Statut de la session -->
             <x-auth-session-status class="mb-4" :status="session('status')" />
             <form method="POST" action="{{ route('password.email') }}">
