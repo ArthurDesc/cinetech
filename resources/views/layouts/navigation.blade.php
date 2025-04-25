@@ -97,21 +97,16 @@
                 {{-- Barre de recherche (si vous en avez une) --}}
 
                 @auth
-                    {{-- Nouveau bouton Favoris animé (desktop/tablette uniquement) --}}
+                    {{-- Bouton Favoris simple (desktop/tablette uniquement) --}}
                     <button
                         @click="window.location='{{ route('favorites.index') }}'"
                         aria-label="Aller à mes favoris"
                         type="button"
-                        class="group items-center justify-start w-11 h-11 bg-gradient-to-r from-primary-600 to-primary-500 rounded-full cursor-pointer relative overflow-hidden transition-all duration-200 shadow-md md:hover:w-32 hover:rounded-[50px] hover:shadow-lg focus:outline-none active:translate-x-1 active:translate-y-1 {{ request()->routeIs('favorites.index') ? 'ring-2 ring-primary-500' : '' }} hidden sm:flex"
+                        class="flex items-center justify-center w-11 h-11 bg-primary-600 rounded-full cursor-pointer shadow-md focus:outline-none {{ request()->routeIs('favorites.index') ? 'ring-2 ring-primary-500' : '' }} hidden sm:flex"
                     >
-                        <div class="flex items-center justify-center w-full transition-all duration-300 group-hover:justify-start group-hover:px-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white group-hover:animate-pulse" fill="{{ request()->routeIs('favorites.index') ? 'currentColor' : 'none' }}" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                            </svg>
-                        </div>
-                        <div class="absolute right-5 transform translate-x-full opacity-0 text-white text-sm font-medium transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 hidden md:block">
-                            Favoris
-                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="{{ request()->routeIs('favorites.index') ? 'currentColor' : 'none' }}" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
                     </button>
 
                     {{-- Dropdown Utilisateur --}}
