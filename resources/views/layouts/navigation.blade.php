@@ -63,7 +63,7 @@
                         </button>
 
                         <!-- Liste des suggestions -->
-                        <div x-show="open && suggestions.length > 0" x-transition class="absolute left-0 right-0 mt-2 bg-dark-light border border-dark-lighter rounded-lg shadow-lg z-50 max-h-80 overflow-y-auto" @mousedown.away="closeList" id="autocomplete-list" role="listbox">
+                        <div x-show="open && suggestions.length > 0" x-transition class="absolute left-0 right-0 mt-2 bg-dark-light border border-dark-lighter rounded-lg shadow-lg z-50 max-h-80 overflow-y-auto autocomplete-scrollbar" @mousedown.away="closeList" id="autocomplete-list" role="listbox">
                             <template x-for="(item, index) in suggestions" :key="item.id + '-' + item.media_type">
                                 <a :href="item.media_type === 'movie' ? '/movies/' + item.id : '/tv-shows/' + item.id"
                                    class="flex items-center px-4 py-2 cursor-pointer hover:bg-primary-600/20 transition-colors duration-150"

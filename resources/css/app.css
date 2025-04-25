@@ -52,3 +52,18 @@
 .bg-dark {
     @apply bg-dark/80 backdrop-blur-sm;
 }
+
+/* Pour les scrollbars sombres et fines */
+.autocomplete-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    background: #181818;
+}
+.autocomplete-scrollbar::-webkit-scrollbar-thumb {
+    background: #3a2a1a;
+    border-radius: 8px;
+}
+/* Firefox */
+.autocomplete-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #3a2a1a #181818;
+}
