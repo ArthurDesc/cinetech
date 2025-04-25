@@ -1,4 +1,4 @@
-<div>
+<div x-data="{ edit: '' }">
     <header>
         <h2 class="text-lg font-bold text-primary-500">
             {{ __('Informations du profil') }}
@@ -13,15 +13,43 @@
     <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
         @csrf
         @method('patch')
-        <div>
-            <x-input-label for="nickname" :value="'Pseudo'" class="text-primary-500" />
-            <x-text-input id="nickname" name="nickname" type="text" class="mt-1 block w-full bg-gray-700 border border-gray-600 text-white pl-3 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition" :value="old('nickname', $user->nickname)" required autofocus autocomplete="nickname" />
-            <x-input-error class="mt-2" :messages="$errors->get('nickname')" />
+        <div class="relative flex items-center">
+            <div class="flex-1">
+                <x-input-label for="nickname" :value="'Pseudo'" class="text-primary-500" />
+                <x-text-input id="nickname" name="nickname" type="text"
+                    x-bind:readonly="edit !== 'nickname'"
+                    class="mt-1 block w-full bg-gray-700 border border-gray-600 text-white pl-3 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition"
+                    :value="old('nickname', $user->nickname)"
+                    required autofocus autocomplete="nickname"
+                    x-ref="nicknameInput"
+                />
+                <x-input-error class="mt-2" :messages="$errors->get('nickname')" />
+            </div>
+            <button type="button" @click="edit = edit === 'nickname' ? '' : 'nickname'; if(edit === 'nickname') { $nextTick(() => $refs.nicknameInput.focus()) }" class="ml-2 p-2 rounded hover:bg-gray-800 transition" :aria-label="edit === 'nickname' ? 'Valider' : 'Modifier le pseudo'">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-primary-500">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487a2.1 2.1 0 1 1 2.97 2.97L7.5 19.79l-4 1 1-4 12.362-12.303z" />
+                </svg>
+            </button>
+        </div>
+        <div class="relative flex items-center">
+            <div class="flex-1">
+                <x-input-label for="email" :value="'Email'" class="text-primary-500" />
+                <x-text-input id="email" name="email" type="email"
+                    x-bind:readonly="edit !== 'email'"
+                    class="mt-1 block w-full bg-gray-700 border border-gray-600 text-white pl-3 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition"
+                    :value="old('email', $user->email)"
+                    required autocomplete="username"
+                    x-ref="emailInput"
+                />
+                <x-input-error class="mt-2" :messages="$errors->get('email')" />
+            </div>
+            <button type="button" @click="edit = edit === 'email' ? '' : 'email'; if(edit === 'email') { $nextTick(() => $refs.emailInput.focus()) }" class="ml-2 p-2 rounded hover:bg-gray-800 transition" :aria-label="edit === 'email' ? 'Valider' : 'Modifier l\'email'">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-primary-500">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487a2.1 2.1 0 1 1 2.97 2.97L7.5 19.79l-4 1 1-4 12.362-12.303z" />
+                </svg>
+            </button>
         </div>
         <div>
-            <x-input-label for="email" :value="'Email'" class="text-primary-500" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full bg-gray-700 border border-gray-600 text-white pl-3 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
                     <p class="text-sm mt-2 text-orange-400">

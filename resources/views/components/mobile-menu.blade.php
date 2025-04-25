@@ -99,7 +99,7 @@
             @auth
                 <a href="{{ route('profile.edit') }}"
                    class="block text-xl font-medium text-white hover:text-primary-500">
-                    Profile
+                    Mon compte
                 </a>
                 <form method="POST" action="{{ route('logout') }}" class="text-center">
                     @csrf

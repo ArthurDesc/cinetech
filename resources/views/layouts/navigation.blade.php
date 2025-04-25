@@ -130,7 +130,7 @@
                             <x-slot name="content">
                                 <div class="bg-dark-light border border-dark-lighter rounded-md shadow-lg">
                                     <x-dropdown-link :href="route('profile.edit')" class="text-white hover:text-primary-500 hover:bg-dark-lighter">
-                                        {{ __('Profil') }}
+                                        {{ __('Mon compte') }}
                                     </x-dropdown-link>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
