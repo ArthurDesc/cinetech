@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="container mx-auto px-4 py-8 bg-gradient-dark min-h-screen">
+    <div class="container mx-auto px-4 py-8 min-h-screen">
         {{-- Barre de recherche --}}
         <div class="mb-8">
             <form action="{{ route('search') }}" method="GET" class="flex gap-4">
