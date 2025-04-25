@@ -56,4 +56,46 @@ class SearchController extends Controller
             'totalPages' => $response['total_pages']
         ]);
     }
+
+    /**
+     * Autocomplétion pour la barre de recherche (API)
+     */
+    public function autocomplete(Request $request)
+    {
+        $query = $request->get('query');
+        if (!$query || mb_strlen($query) < 2) {
+            return response()->json([]);
+        }
+
+        $response = Http::get("{$this->baseUrl}/search/multi", [
+            'api_key' => $this->apiKey,
+            'language' => 'fr-FR',
+            'query' => $query,
+            'page' => 1,
+            'include_adult' => false
+        ]);
+
+        if (!$response->successful()) {
+            return response()->json([]);
+        }
+
+        $results = collect($response->json('results'))
+            ->filter(function($item) {
+                return in_array($item['media_type'] ?? 'movie', ['movie', 'tv']);
+            })
+            ->take(5)
+            ->map(function($item) {
+                return [
+                    'id' => $item['id'],
+                    'title' => $item['title'] ?? $item['name'] ?? 'Sans titre',
+                    'media_type' => $item['media_type'] ?? 'movie',
+                    'poster_url' => isset($item['poster_path']) && $item['poster_path']
+                        ? config('services.tmdb.image_base_url') . $item['poster_path']
+                        : asset('images/placeholder-poster.jpg'),
+                ];
+            })
+            ->values();
+
+        return response()->json($results);
+    }
 } 

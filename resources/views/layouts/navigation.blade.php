@@ -38,23 +38,57 @@
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6 flex-1">
-                <form action="{{ route('search') }}" method="GET" class="w-full max-w-xl mx-auto">
+                <form action="{{ route('search') }}" method="GET" class="w-full max-w-xl mx-auto" x-data="autocompleteSearch()" @keydown.escape="closeList" autocomplete="off">
                     <div class="relative">
                         <input type="text" name="query" placeholder="Rechercher un film ou une série..."
+                            x-model="query"
+                            @input.debounce.300ms="fetchSuggestions"
+                            @focus="openList"
+                            @keydown.arrow-down.prevent="highlightNext"
+                            @keydown.arrow-up.prevent="highlightPrev"
+                            @keydown.enter.prevent="goToHighlighted"
+                            @blur="closeListWithDelay"
                             value="{{ request('query') }}"
-                            class="w-full px-4 py-2 bg-dark text-white rounded-lg
-                                      border border-dark-lighter focus:outline-none
-                                      focus:border-primary-500 focus:ring-1 focus:ring-primary-500">
+                            class="w-full px-4 py-2 bg-dark text-white rounded-lg border border-dark-lighter focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
+                            aria-autocomplete="list"
+                            aria-controls="autocomplete-list"
+                            aria-expanded="open"
+                        >
 
                         <button type="submit"
-                            class="absolute right-2 top-1/2 -translate-y-1/2
-                                       text-white hover:text-primary-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            class="absolute right-2 top-1/2 -translate-y-1/2 text-white hover:text-primary-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
                         </button>
+
+                        <!-- Liste des suggestions -->
+                        <div x-show="open && suggestions.length > 0" x-transition class="absolute left-0 right-0 mt-2 bg-dark-light border border-dark-lighter rounded-lg shadow-lg z-50 max-h-80 overflow-y-auto" @mousedown.away="closeList" id="autocomplete-list" role="listbox">
+                            <template x-for="(item, index) in suggestions" :key="item.id + '-' + item.media_type">
+                                <a :href="item.media_type === 'movie' ? '/movies/' + item.id : '/tv-shows/' + item.id"
+                                   class="flex items-center px-4 py-2 cursor-pointer hover:bg-primary-600/20 transition-colors duration-150"
+                                   :class="{ 'bg-primary-600/30': highlightedIndex === index }"
+                                   @mouseenter="highlightedIndex = index"
+                                   @mouseleave="highlightedIndex = -1"
+                                   @mousedown.prevent="goTo(index)"
+                                   role="option"
+                                   :aria-selected="highlightedIndex === index">
+                                    <img :src="item.poster_url" alt="" class="w-8 h-12 object-cover rounded mr-3 bg-dark-lighter flex-shrink-0">
+                                    <div class="flex flex-col">
+                                        <span class="text-white text-sm font-medium" x-text="item.title"></span>
+                                        <span class="text-xs text-gray-400 capitalize" x-text="item.media_type === 'movie' ? 'Film' : 'Série'"></span>
+                                    </div>
+                                </a>
+                            </template>
+                        </div>
+                        <!-- Aucun résultat -->
+                        <div x-show="open && query.length >= 2 && suggestions.length === 0 && !loading" x-transition class="absolute left-0 right-0 mt-2 bg-dark-light border border-dark-lighter rounded-lg shadow-lg z-50 p-4 text-center text-gray-400">
+                            Aucun résultat trouvé
+                        </div>
+                        <!-- Chargement -->
+                        <div x-show="open && loading" x-transition class="absolute left-0 right-0 mt-2 bg-dark-light border border-dark-lighter rounded-lg shadow-lg z-50 p-4 text-center text-primary-500">
+                            Recherche...
+                        </div>
                     </div>
                 </form>
             </div>
@@ -165,3 +199,65 @@
 
 {{-- Div de compensation --}}
 <div class="h-16"></div>
+
+<script>
+    function autocompleteSearch() {
+        return {
+            query: '',
+            suggestions: [],
+            open: false,
+            loading: false,
+            highlightedIndex: -1,
+            fetchSuggestions() {
+                if (this.query.length < 2) {
+                    this.suggestions = [];
+                    this.open = false;
+                    return;
+                }
+                this.loading = true;
+                fetch(`/api/autocomplete?query=${encodeURIComponent(this.query)}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        this.suggestions = data;
+                        this.loading = false;
+                        this.open = true;
+                        this.highlightedIndex = -1;
+                    })
+                    .catch(() => {
+                        this.suggestions = [];
+                        this.loading = false;
+                        this.open = true;
+                    });
+            },
+            openList() {
+                if (this.suggestions.length > 0) this.open = true;
+            },
+            closeList() {
+                this.open = false;
+                this.highlightedIndex = -1;
+            },
+            closeListWithDelay() {
+                setTimeout(() => this.closeList(), 100);
+            },
+            highlightNext() {
+                if (!this.open || this.suggestions.length === 0) return;
+                this.highlightedIndex = (this.highlightedIndex + 1) % this.suggestions.length;
+            },
+            highlightPrev() {
+                if (!this.open || this.suggestions.length === 0) return;
+                this.highlightedIndex = (this.highlightedIndex - 1 + this.suggestions.length) % this.suggestions.length;
+            },
+            goToHighlighted() {
+                if (this.highlightedIndex >= 0 && this.suggestions[this.highlightedIndex]) {
+                    this.goTo(this.highlightedIndex);
+                }
+            },
+            goTo(index) {
+                const item = this.suggestions[index];
+                if (item) {
+                    window.location.href = item.media_type === 'movie' ? `/movies/${item.id}` : `/tv-shows/${item.id}`;
+                }
+            }
+        }
+    }
+</script>

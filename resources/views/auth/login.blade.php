@@ -50,7 +50,7 @@
                 <!-- Se souvenir de moi -->
                 <div class="block mt-4">
                     <label for="remember_me" class="inline-flex items-center">
-                        <input id="remember_me" type="checkbox" class="rounded bg-gray-700 border-gray-600 text-red-500 focus:ring-orange-500" name="remember">
+                        <input id="remember_me" type="checkbox" class="rounded bg-gray-700 text-red-500 focus:ring-orange-500" name="remember">
                         <span class="ms-2 text-sm text-gray-300">{{ __('Se souvenir de moi') }}</span>
                     </label>
                 </div>

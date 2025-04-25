@@ -69,5 +69,7 @@ Composants :
 
  Tableau de bord admin simple (liste des utilisateurs/avis)
 
+Route api : 
+Pour tester une route tu dois utiliser ce port local :  http://127.0.0.1:8000/api
 
 
