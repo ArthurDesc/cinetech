@@ -204,7 +204,7 @@
                 <div class="mt-6 rounded-lg p-4 bg-gray-900 border border-gray-700 shadow-sm">
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2">
-                            <span class="text-primary-400 font-semibold" x-text="comment.user.name"></span>
+                            <span class="text-primary-400 font-semibold" x-text="comment.user.nickname"></span>
                             <span class="text-gray-400 text-sm"
                                   x-text="new Date(comment.created_at).toLocaleDateString()">
                             </span>
@@ -272,7 +272,7 @@
                                 <div class="bg-gray-800 border border-gray-700 rounded-lg p-3">
                                     <div class="flex items-center justify-between mb-1">
                                         <div class="flex items-center gap-2">
-                                            <span class="text-primary-400" x-text="reply.user.name"></span>
+                                            <span class="text-primary-400 font-semibold" x-text="reply.user.nickname"></span>
                                             <span class="text-gray-400 text-sm"
                                                   x-text="new Date(reply.created_at).toLocaleDateString()">
                                             </span>

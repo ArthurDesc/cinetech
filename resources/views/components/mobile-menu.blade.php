@@ -81,7 +81,7 @@
         @auth
             <!-- Informations utilisateur -->
             <div class="pb-6 border-b border-dark-lighter text-center">
-                <p class="text-xl font-medium text-white">{{ Auth::user()->name }}</p>
+                <p class="text-xl font-medium text-white">{{ Auth::user()->nickname }}</p>
             </div>
         @endauth
 
