@@ -1,6 +1,0 @@
----
-description: 
-globs: 
-alwaysApply: true
----
-A chaque fois que tu modifies le code qui affectera le visuel d'une page web, tu dois prendre un screenshot et vérifier si la capture du site est correct par rapport à la modification voulue. Les captures que tu fais sont enregistrés dans le dossier screenshots à la racine du projet (C:\Docker\dev-environment\Projects\laravel-projects\cinetech\screenshots).

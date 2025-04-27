@@ -129,6 +129,11 @@
 
                             <x-slot name="content">
                                 <div class="bg-dark-light border border-dark-lighter rounded-md shadow-lg">
+                                    @if(Auth::user()->isAdmin())
+                                        <x-dropdown-link :href="route('admin.dashboard')" class="text-white hover:text-primary-500 hover:bg-dark-lighter">
+                                            Administration
+                                        </x-dropdown-link>
+                                    @endif
                                     <x-dropdown-link :href="route('profile.edit')" class="text-white hover:text-primary-500 hover:bg-dark-lighter">
                                         {{ __('Mon compte') }}
                                     </x-dropdown-link>

@@ -21,6 +21,7 @@ class User extends Authenticatable
         'nickname',
         'email',
         'password',
+        'is_admin',
     ];
 
     /**
@@ -41,10 +42,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'is_admin' => 'boolean',
     ];
 
     public function favorites()
     {
         return $this->hasMany(Favorite::class);
+    }
+
+    /**
+     * Check if the user is an admin.
+     */
+    public function isAdmin()
+    {
+        return $this->is_admin;
     }
 }
