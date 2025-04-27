@@ -21,15 +21,28 @@
                             'X-Requested-With': 'XMLHttpRequest'
                         }
                     })
-                    .then(response => response.json())
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Erreur réseau');
+                        }
+                        return response.json();
+                    })
                     .then(data => {
-                        this.comments = data.comments || data;
+                        // S'assurer que data est un tableau
+                        this.comments = Array.isArray(data) ? data : (data.comments || []);
                         this.isLoading = false;
                     })
                     .catch(error => {
                         console.error('Erreur:', error);
-                        // Réessayer après un délai
-                        setTimeout(() => this.init(), 2000);
+                        this.comments = [];
+                        this.isLoading = false;
+                        // Afficher un message d'erreur à l'utilisateur si nécessaire
+                        if (window.Alpine.store('notifications')) {
+                            window.Alpine.store('notifications').add({
+                                type: 'error',
+                                message: 'Impossible de charger les commentaires'
+                            });
+                        }
                     });
                 },
 

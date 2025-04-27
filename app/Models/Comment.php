@@ -64,6 +64,6 @@ class Comment extends Model
         return $query->where('tmdb_id', $tmdbId)
                     ->where('type', $type)
                     ->whereNull('parent_id') // Commentaires principaux uniquement
-                    ->with(['user', 'replies.user']); // Charge les relations
+                    ->with(['user:id,nickname', 'replies.user:id,nickname']); // Charge les relations avec nickname
     }
 } 

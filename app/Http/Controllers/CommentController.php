@@ -22,7 +22,7 @@ class CommentController extends Controller
             $request->tmdb_id,
             $request->type
         )->whereNull('parent_id')
-        ->with(['user:id,name', 'replies.user:id,name']) // Sélectionner uniquement les champs nécessaires
+        ->with(['user:id,nickname', 'replies.user:id,nickname']) // Changé name en nickname
         ->latest()
         ->get();
 
@@ -54,6 +54,9 @@ class CommentController extends Controller
             ]);
 
             $comment->load(['user', 'replies.user']);
+
+            // Invalider le cache pour ce média
+            cache()->forget("comments_{$validated['tmdb_id']}_{$validated['type']}");
 
             return response()->json([
                 'comment' => $comment,
@@ -103,6 +106,9 @@ class CommentController extends Controller
 
         $comment->delete();
 
+        // Invalider le cache pour ce média
+        cache()->forget("comments_{$comment->tmdb_id}_{$comment->type}");
+
         if (request()->wantsJson() || request()->ajax()) {
             return response()->json([
                 'message' => $comment->parent_id
@@ -141,6 +147,9 @@ class CommentController extends Controller
         ]);
 
         $reply->load('user');
+
+        // Invalider le cache pour ce média
+        cache()->forget("comments_{$comment->tmdb_id}_{$comment->type}");
 
         return response()->json([
             'reply' => $reply,
