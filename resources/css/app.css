@@ -68,10 +68,6 @@
     scrollbar-color: #3a2a1a #181818;
 }
 
-html, body {
-    height: 100%;
-    min-height: 100vh;
-}
 
 input:focus, textarea:focus, select:focus {
   --tw-ring-color: transparent !important;
