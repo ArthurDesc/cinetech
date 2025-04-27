@@ -33,7 +33,11 @@
 
         <!-- Page Content -->
         <main class="min-h-screen pb-24">
-            {{ $slot }}
+            @hasSection('content')
+                @yield('content')
+            @else
+                {{ $slot ?? '' }}
+            @endif
         </main>
     </div>
     <x-footer />

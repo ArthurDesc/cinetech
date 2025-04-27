@@ -103,12 +103,16 @@ class CommentController extends Controller
 
         $comment->delete();
 
-        return response()->json([
-            'message' => $comment->parent_id
-                ? 'Réponse supprimée'
-                : 'Commentaire et réponses supprimés',
-            'status' => 'success'
-        ]);
+        if (request()->wantsJson() || request()->ajax()) {
+            return response()->json([
+                'message' => $comment->parent_id
+                    ? 'Réponse supprimée'
+                    : 'Commentaire et réponses supprimés',
+                'status' => 'success'
+            ]);
+        }
+        // Redirection classique pour les formulaires HTML
+        return redirect()->route('admin.comments')->with('success', $comment->parent_id ? 'Réponse supprimée' : 'Commentaire et réponses supprimés');
     }
 
     /**

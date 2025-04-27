@@ -23,6 +23,9 @@ class DatabaseSeeder extends Seeder
             'nickname' => 'Arthur Descourvieres',
             'email' => 'arthur.descourvieres@gmail.com',
             'password' => bcrypt('Password123@'),
+            'is_admin' => true,
         ]);
+
+        \App\Models\Comment::factory(20)->create();
     }
 }

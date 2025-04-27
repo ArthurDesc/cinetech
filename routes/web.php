@@ -43,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/favorites/check', [FavoriteController::class, 'check'])->name('favorites.check');
     Route::middleware(['is_admin'])->group(function () {
         Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+        Route::get('/admin/comments', [AdminController::class, 'comments'])->name('admin.comments');
     });
 });
 
@@ -52,8 +53,8 @@ Route::prefix('comments')->group(function () {
     Route::get('/', [CommentController::class, 'index'])->name('comments.index');
     Route::post('/', [CommentController::class, 'store'])->name('comments.store');
     Route::put('/{comment}', [CommentController::class, 'update'])->name('comments.update');
-    Route::delete('/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
     Route::post('/{comment}/reply', [CommentController::class, 'reply'])->name('comments.reply');
+    Route::delete('/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 });
 
 require __DIR__.'/auth.php';
