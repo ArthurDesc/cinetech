@@ -72,3 +72,8 @@ html, body {
     height: 100%;
     min-height: 100vh;
 }
+
+input:focus, textarea:focus, select:focus {
+  --tw-ring-color: transparent !important;
+  box-shadow: none !important;
+}

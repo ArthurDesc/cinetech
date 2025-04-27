@@ -18,7 +18,7 @@
                 <x-input-label for="nickname" :value="'Pseudo'" class="text-primary-500" />
                 <x-text-input id="nickname" name="nickname" type="text"
                     x-bind:readonly="edit !== 'nickname'"
-                    class="mt-1 block w-full bg-gray-700 border border-gray-600 text-white pl-3 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition"
+                    x-bind:class="edit === 'nickname' ? 'mt-1 block w-full bg-gray-700 text-white pl-3 rounded-lg focus:ring-orange-500 focus:border-orange-500 transition' : 'mt-1 block w-full bg-gray-700 text-white pl-3 rounded-lg transition'"
                     :value="old('nickname', $user->nickname)"
                     required autofocus autocomplete="nickname"
                     x-ref="nicknameInput"
@@ -36,7 +36,7 @@
                 <x-input-label for="email" :value="'Email'" class="text-primary-500" />
                 <x-text-input id="email" name="email" type="email"
                     x-bind:readonly="edit !== 'email'"
-                    class="mt-1 block w-full bg-gray-700 border border-gray-600 text-white pl-3 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition"
+                    x-bind:class="edit === 'email' ? 'mt-1 block w-full bg-gray-700 border border-gray-600 text-white pl-3 rounded-lg focus:ring-orange-500 focus:border-orange-500 transition' : 'mt-1 block w-full bg-gray-700 border border-gray-600 text-white pl-3 rounded-lg transition'"
                     :value="old('email', $user->email)"
                     required autocomplete="username"
                     x-ref="emailInput"

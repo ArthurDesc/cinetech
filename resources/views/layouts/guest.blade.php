@@ -14,10 +14,10 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased bg-gray-900 text-white">
+    <body class="font-sans antialiased text-white">
         <!-- Pattern background -->
         <div id="pattern-bg" class="fixed inset-0 w-full h-full pointer-events-none z-0"></div>
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 relative z-10">
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 relative z-10 pb-24">
             <div class="mt-6">
                 <a href="/" class="flex items-center">
                     <x-application-logo class="w-20 h-20 fill-current text-red-500" />
@@ -26,6 +26,7 @@
 
             {{ $slot }}
         </div>
+        <x-footer />
         <!-- Dot pattern script -->
         <script src="{{ asset('js/dotPattern.js') }}"></script>
         <script>

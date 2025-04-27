@@ -1,4 +1,4 @@
-<footer class="w-full bg-dark-light text-white py-4 mt-8 border-t border-gray-700">
+<footer class="w-full bg-dark-light text-white py-4 border-t border-gray-700">
     <div class="max-w-7xl mx-auto flex flex-col items-center justify-center px-4 gap-2 text-base text-center">
         <div class="flex flex-col items-center gap-2">
             <div class="flex items-center gap-3 justify-center">
