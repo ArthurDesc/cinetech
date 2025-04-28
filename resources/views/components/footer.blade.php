@@ -10,7 +10,7 @@
             <a href="{{ url('/') }}" class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary rounded">Accueil</a>
             <a href="{{ url('/search') }}" class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary rounded">Recherche</a>
             @auth
-                <a href="{{ url('/favorites') }}" class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary rounded">Favoris</a>
+                <a href="{{ url('/profile') }}" class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary rounded">Profil</a>
             @else
                 <a href="{{ url('/login') }}" class="hover:underline focus:outline-none focus:ring-2 focus:ring-primary rounded">Connexion</a>
             @endauth

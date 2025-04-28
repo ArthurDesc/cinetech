@@ -4,7 +4,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\TvShowController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\AdminController;
@@ -38,9 +37,6 @@ Route::get('/tv-shows', [TvShowController::class, 'index'])->name('tvshows.index
 Route::get('/tv-shows/{id}', [TvShowController::class, 'show'])->name('tvshows.show');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
-    Route::post('/favorites/toggle', [FavoriteController::class, 'toggle'])->name('favorites.toggle');
-    Route::get('/favorites/check', [FavoriteController::class, 'check'])->name('favorites.check');
     Route::middleware(['is_admin'])->group(function () {
         Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
         Route::get('/admin/comments', [AdminController::class, 'comments'])->name('admin.comments');

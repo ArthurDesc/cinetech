@@ -2,16 +2,11 @@
     <div class="container mx-auto px-4 py-8">
         {{-- Détails du film --}}
         <div class="flex flex-col md:flex-row gap-8">
-            {{-- Poster du film et bouton favoris --}}
+            {{-- Poster du film --}}
             <div class="w-full md:w-1/3">
                 <img src="{{ config('services.tmdb.image_base_url') . $movie['poster_path'] }}"
                      alt="{{ $movie['title'] }}"
                      class="w-full rounded-lg shadow-lg mb-4">
-
-                <x-favorite-button
-                    :tmdbId="$movie['id']"
-                    type="movie"
-                />
             </div>
 
             {{-- Informations du film --}}

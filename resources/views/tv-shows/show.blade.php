@@ -7,12 +7,6 @@
                 <img src="{{ $show['poster_url'] }}"
                      alt="{{ $show['name'] }}"
                      class="w-full rounded-lg shadow-lg mb-4">
-
-                {{-- Bouton Favoris normal --}}
-                <x-favorite-button
-                    :tmdbId="$show['id']"
-                    type="tv"
-                />
             </div>
 
             {{-- Informations de la série --}}

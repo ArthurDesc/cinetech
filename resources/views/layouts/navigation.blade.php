@@ -97,18 +97,6 @@
                 {{-- Barre de recherche (si vous en avez une) --}}
 
                 @auth
-                    {{-- Bouton Favoris simple (desktop/tablette uniquement) --}}
-                    <button
-                        @click="window.location='{{ route('favorites.index') }}'"
-                        aria-label="Aller à mes favoris"
-                        type="button"
-                        class="flex items-center justify-center w-11 h-11 bg-primary-600 rounded-full cursor-pointer shadow-md focus:outline-none {{ request()->routeIs('favorites.index') ? 'ring-2 ring-primary-500' : '' }} hidden sm:flex"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="{{ request()->routeIs('favorites.index') ? 'currentColor' : 'none' }}" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                        </svg>
-                    </button>
-
                     {{-- Dropdown Utilisateur --}}
                     <div class="hidden sm:flex sm:items-center">
                         <x-dropdown align="right" width="48">
@@ -166,20 +154,6 @@
 
             <!-- Hamburger Button -->
             <div class="flex items-center sm:hidden space-x-4">
-                @auth
-                    {{-- Icône Favoris Mobile (mobile uniquement) --}}
-                    <a href="{{ route('favorites.index') }}"
-                        class="relative flex items-center text-white hover:text-primary-500 transition-colors duration-200 {{ request()->routeIs('favorites.index') ? 'text-primary-500' : '' }} sm:hidden"
-                        aria-label="Aller à mes favoris">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
-                            fill="{{ request()->routeIs('favorites.index') ? 'currentColor' : 'none' }}"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                        </svg>
-                    </a>
-                @endauth
-
                 <button @click="$dispatch('toggle-mobile-menu')"
                     class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-primary-500 hover:bg-dark-lighter focus:outline-none transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">

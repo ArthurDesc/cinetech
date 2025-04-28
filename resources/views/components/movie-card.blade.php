@@ -21,8 +21,4 @@
         </div>
     </a>
 
-    <x-favorite-button-card
-        :tmdbId="$movie['id']"
-        type="movie"
-    />
 </div>
