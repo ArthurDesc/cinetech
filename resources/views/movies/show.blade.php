@@ -68,7 +68,7 @@
                 <div class="mt-8">
                     <h2 class="text-xl font-semibold text-white mb-4">Films similaires</h2>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        @foreach($movie['similar']['results'] as $similar)
+                        @foreach(array_slice($movie['similar']['results'], 0, 4) as $similar)
                             <x-movie-card :movie="$similar" />
                         @endforeach
                     </div>

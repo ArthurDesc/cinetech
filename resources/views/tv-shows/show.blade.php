@@ -83,7 +83,7 @@
                 <div class="mt-8">
                     <h2 class="text-xl font-semibold text-white mb-4">Séries similaires</h2>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        @foreach($show['similar']['results'] as $similar)
+                        @foreach(array_slice($show['similar']['results'], 0, 4) as $similar)
                             <x-tv-shows.show-card :show="$similar" />
                         @endforeach
                     </div>
