@@ -85,7 +85,7 @@
     </div>
 
     <div class="mt-4">
-        {{ $comments->links() }}
+        <x-pagination :currentPage="$currentPage" :totalPages="$totalPages" route="admin.comments" />
     </div>
 </div>
 

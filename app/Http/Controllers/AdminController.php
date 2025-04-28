@@ -20,6 +20,8 @@ class AdminController extends Controller
     public function comments()
     {
         $comments = \App\Models\Comment::with('user')->latest()->paginate(15);
-        return view('admin.comments', compact('comments'));
+        $currentPage = $comments->currentPage();
+        $totalPages = $comments->lastPage();
+        return view('admin.comments', compact('comments', 'currentPage', 'totalPages'));
     }
 } 
