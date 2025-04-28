@@ -90,7 +90,7 @@
 </div>
 
 <!-- Modal personnalisé -->
-<div id="deleteModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 hidden">
+<div id="deleteModal" class="fixed inset-0 z-50 flex items-center justify-center h-screen px-4 sm:px-0 bg-black bg-opacity-60 hidden">
     <div class="bg-dark-light rounded-lg shadow-lg p-4 sm:p-8 w-11/12 sm:w-full max-w-md mx-4 relative">
         <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-400 hover:text-white text-2xl font-bold">&times;</button>
         <h2 class="text-lg sm:text-xl font-bold mb-4 text-white">Confirmer la suppression</h2>
