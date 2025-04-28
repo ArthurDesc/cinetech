@@ -195,7 +195,7 @@
 <div x-data="{ open: false }"
      @toggle-mobile-menu.window="open = !open"
      @keydown.escape.window="open = false"
-     class="fixed inset-0 z-50 pointer-events-none">
+     class="fixed inset-0 z-50 pointer-events-none sm:hidden">
     <x-mobile-menu />
 </div>
 

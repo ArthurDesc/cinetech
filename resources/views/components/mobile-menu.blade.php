@@ -6,7 +6,7 @@
      x-transition:leave-start="translate-x-0"
      x-transition:leave-end="translate-x-full"
      @click.away="open = false"
-     class="fixed top-0 right-0 w-3/4 h-full bg-dark-light border-l border-dark-lighter transform z-50 overflow-auto pointer-events-auto">
+     class="fixed top-0 right-0 w-3/4 h-full bg-dark-light border-l border-dark-lighter transform z-50 overflow-auto pointer-events-auto sm:hidden">
 
     <!-- En-tête du menu -->
     <div class="flex items-center justify-between p-6 border-b border-dark-lighter">
