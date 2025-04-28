@@ -34,6 +34,6 @@ class ResetPassword extends Notification
             ->action('Réinitialiser mon mot de passe', $url)
             ->line('Ce lien de réinitialisation expirera dans '.config('auth.passwords.'.config('auth.defaults.passwords').'.expire').' minutes.')
             ->line("Si vous n'avez pas demandé de réinitialisation, aucune action supplémentaire n'est requise.")
-            ->salutation('Cordialement,\nL\'équipe Cinetech');
+            ->salutation('Cordialement, L\'équipe Cinetech');
     }
 } 
