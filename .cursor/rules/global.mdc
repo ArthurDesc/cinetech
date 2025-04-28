@@ -72,4 +72,14 @@ Composants :
 Route api : 
 Pour tester une route tu dois utiliser ce port local :  http://127.0.0.1:8000/api
 
+J'ai choisi cette foncitonnalitée à présenter : 
+Ajout de commentaires (côté utilisateur)
+Montre la création d’un avis/commentaire via un formulaire.
+Permet de parler de la validation, de la sécurité (CSRF), de l’accessibilité (formulaire, feedback).
+Tu peux montrer l’enregistrement en base, l’affichage dynamique, la gestion des erreurs (ex : champ vide).
+Suppression/modération de commentaires (côté admin)
+Montre la gestion des rôles (seul l’admin peut supprimer).
+Permet de parler de la sécurité (protection des routes, vérification du rôle).
+Tu peux montrer le workflow complet : l’admin voit la liste des commentaires, clique sur “supprimer”, feedback utilisateur, suppression en base, gestion des erreurs (ex : tentative de suppression par un non-admin).
+
 

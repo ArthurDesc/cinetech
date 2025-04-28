@@ -37,43 +37,30 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $validated = $request->validate([
-                'tmdb_id' => 'required|integer',
-                'type' => 'required|in:movie,tv',
-                'content' => 'required|string|max:1000',
-                'parent_id' => 'nullable|exists:comments,id'
-            ]);
+        $validated = $request->validate([
+            'tmdb_id' => 'required|integer',
+            'type' => 'required|in:movie,tv',
+            'content' => 'required|string|max:1000',
+            'parent_id' => 'nullable|exists:comments,id'
+        ]);
 
-            $comment = Comment::create([
-                'user_id' => auth()->id(),
-                'tmdb_id' => $validated['tmdb_id'],
-                'type' => $validated['type'],
-                'content' => $validated['content'],
-                'parent_id' => $validated['parent_id'] ?? null
-            ]);
+        $comment = Comment::create([
+            'user_id' => auth()->id(),
+            'tmdb_id' => $validated['tmdb_id'],
+            'type' => $validated['type'],
+            'content' => $validated['content'],
+            'parent_id' => $validated['parent_id'] ?? null
+        ]);
 
-            $comment->load(['user', 'replies.user']);
+        $comment->load(['user', 'replies.user']);
 
-            // Invalider le cache pour ce média
-            cache()->forget("comments_{$validated['tmdb_id']}_{$validated['type']}");
+        cache()->forget("comments_{$validated['tmdb_id']}_{$validated['type']}");
 
-            return response()->json([
-                'comment' => $comment,
-                'message' => 'Commentaire ajouté avec succès',
-                'status' => 'success'
-            ], 201);
-
-        } catch (\Exception $e) {
-            // Log l'erreur
-
-            // Retourner une réponse JSON même en cas d'erreur
-            return response()->json([
-                'message' => 'Une erreur est survenue',
-                'error' => $e->getMessage(),
-                'status' => 'error'
-            ], 500);
-        }
+        return response()->json([
+            'comment' => $comment,
+            'message' => 'Commentaire ajouté avec succès',
+            'status' => 'success'
+        ], 201);
     }
 
     /**
