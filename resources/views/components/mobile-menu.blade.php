@@ -97,6 +97,12 @@
             </a>
 
             @auth
+                @if(Auth::user()->isAdmin())
+                    <a href="{{ route('admin.dashboard') }}"
+                       class="block text-xl font-medium text-white hover:text-primary-500 {{ request()->routeIs('admin.dashboard') ? 'text-primary-500' : '' }}">
+                        Administration
+                    </a>
+                @endif
                 <a href="{{ route('profile.edit') }}"
                    class="block text-xl font-medium text-white hover:text-primary-500">
                     Mon compte
