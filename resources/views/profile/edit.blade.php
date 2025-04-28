@@ -5,8 +5,8 @@
         </h2>
     </x-slot>
 
-    <div class="py-6 flex flex-col items-center min-h-screen">
-        <x-magic-card class="w-full max-w-5xl mx-auto px-6 py-8 bg-black shadow-xl ring-1 ring-orange-700/20 rounded-2xl">
+    <div class="py-6 flex flex-col items-center min-h-screen px-2 sm:px-4">
+        <x-magic-card class="w-full max-w-5xl mx-auto px-2 sm:px-6 py-8 bg-black shadow-xl ring-1 ring-orange-700/20 rounded-2xl">
             <div class="flex flex-col md:flex-row md:gap-8 w-full" x-data="{ showPassword: false }">
                 <!-- Colonne gauche : Profil + Mot de passe dans un seul bloc -->
                 <div class="flex-1 flex flex-col justify-between">
