@@ -19,7 +19,7 @@
         <div id="pattern-bg" class="fixed inset-0 w-full h-full pointer-events-none z-0"></div>
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 relative z-10 pb-24">
             <div class="mt-6">
-                <a href="/" class="flex items-center">
+                <a href="{{ route('home') }}" class="flex items-center">
                     <x-application-logo class="w-20 h-20 fill-current text-red-500" />
                 </a>
             </div>
