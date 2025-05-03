@@ -213,7 +213,7 @@
 
             {{-- Modal de confirmation de suppression --}}
             <div x-show="showDeleteModal" 
-                 class="fixed inset-0 z-50 flex items-center justify-center"
+                 class="fixed inset-0 z-50 flex items-start justify-center pt-[140vh]"
                  x-cloak>
                 <div class="fixed inset-0 bg-black bg-opacity-50" @click="closeDeleteModal"></div>
                 <div class="bg-dark-light rounded-lg p-6 max-w-lg w-full mx-4 z-10 relative">
