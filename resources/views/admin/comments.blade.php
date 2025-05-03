@@ -90,8 +90,11 @@
 </div>
 
 <!-- Modal de confirmation -->
-<div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-    <div class="bg-dark-light rounded-lg p-6 max-w-lg w-full mx-4">
+<div id="deleteModal" class="fixed inset-0 z-50 hidden flex items-center justify-center h-screen">
+    <!-- Overlay qui recouvre tout -->
+    <div class="fixed inset-0 bg-black bg-opacity-50"></div>
+    <!-- Contenu du modal -->
+    <div class="bg-dark-light rounded-lg p-6 max-w-lg w-full mx-4 z-10">
         <h2 class="text-xl font-bold mb-4 text-white">Confirmer la suppression</h2>
         <p class="text-gray-300 mb-4">Êtes-vous sûr de vouloir supprimer ce commentaire ?</p>
         <div class="bg-dark rounded p-3 mb-4">
