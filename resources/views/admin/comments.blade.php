@@ -89,45 +89,45 @@
     </div>
 </div>
 
-<!-- Modal personnalisé -->
-<div id="deleteModal" class="fixed inset-0 z-50 flex items-center justify-center h-screen px-4 sm:px-0 bg-black bg-opacity-60 hidden">
-    <div class="bg-dark-light rounded-lg shadow-lg p-4 sm:p-8 w-11/12 sm:w-full max-w-md mx-4 relative">
-        <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-400 hover:text-white text-2xl font-bold">&times;</button>
-        <h2 class="text-lg sm:text-xl font-bold mb-4 text-white">Confirmer la suppression</h2>
-        <p class="mb-4 text-gray-300">Voulez-vous vraiment supprimer ce commentaire&nbsp;?</p>
-        <div id="modalCommentContent" class="mb-4 p-3 bg-dark rounded text-gray-200 text-sm"></div>
-        <form id="deleteForm" method="POST">
-            @csrf
-            @method('DELETE')
-            <div class="flex justify-end gap-2">
-                <button type="button" onclick="closeModal()" class="px-3 sm:px-4 py-2 rounded bg-gray-500 hover:bg-gray-600 text-white text-sm sm:text-base">Annuler</button>
-                <button type="submit" class="px-3 sm:px-4 py-2 rounded bg-red-600 hover:bg-red-700 text-white text-sm sm:text-base">Supprimer</button>
-            </div>
-        </form>
+<!-- Modal de confirmation -->
+<div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-dark-light rounded-lg p-6 max-w-lg w-full mx-4">
+        <h2 class="text-xl font-bold mb-4 text-white">Confirmer la suppression</h2>
+        <p class="text-gray-300 mb-4">Êtes-vous sûr de vouloir supprimer ce commentaire ?</p>
+        <div class="bg-dark rounded p-3 mb-4">
+            <p id="commentContent" class="text-gray-300 text-sm"></p>
+        </div>
+        <div class="flex justify-end gap-3">
+            <button onclick="closeModal()" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">
+                Annuler
+            </button>
+            <form id="deleteForm" method="POST" class="inline">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                    Confirmer
+                </button>
+            </form>
+        </div>
     </div>
 </div>
 
 <script>
-    function openModal(commentId, content) {
-        document.getElementById('deleteModal').classList.remove('hidden');
-        document.getElementById('modalCommentContent').textContent = content;
-        const form = document.getElementById('deleteForm');
-        form.action = '/comments/' + commentId;
-        // Focus sur le bouton annuler pour accessibilité
-        setTimeout(() => {
-            form.querySelector('button[type="button"]').focus();
-        }, 100);
-    }
+function openModal(commentId, content) {
+    const modal = document.getElementById('deleteModal');
+    const form = document.getElementById('deleteForm');
+    const contentElement = document.getElementById('commentContent');
     
-    function closeModal() {
-        document.getElementById('deleteModal').classList.add('hidden');
-        document.getElementById('modalCommentContent').textContent = '';
-        document.getElementById('deleteForm').action = '';
-    }
-    
-    // Fermer le modal avec la touche Echap
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeModal();
-    });
+    form.action = `/comments/${commentId}`;
+    contentElement.textContent = content;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+}
+
+function closeModal() {
+    const modal = document.getElementById('deleteModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+}
 </script>
 @endsection 
