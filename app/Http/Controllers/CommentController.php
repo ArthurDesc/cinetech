@@ -17,17 +17,19 @@ class CommentController extends Controller
      */
     public function index(Request $request)
     {
-        // Optimiser les requêtes
+        $perPage = 3;
         $comments = Comment::forMedia(
             $request->tmdb_id,
             $request->type
         )->latest()
-        ->get();
+        ->paginate($perPage);
 
-        // Mise en cache courte durée si nécessaire
-        return cache()->remember("comments_{$request->tmdb_id}_{$request->type}", 60, function() use ($comments) {
-            return response()->json($comments);
-        });
+        return response()->json([
+            'comments' => $comments->items(),
+            'current_page' => $comments->currentPage(),
+            'last_page' => $comments->lastPage(),
+            'total' => $comments->total(),
+        ]);
     }
 
     /**

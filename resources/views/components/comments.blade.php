@@ -10,12 +10,14 @@
                 isLoading: true,
                 showDeleteModal: false,
                 commentToDelete: null,
+                currentPage: 1,
+                lastPage: 1,
+                total: 0,
 
                 // Initialisation des commentaires
-                init() {
+                init(page = 1) {
                     this.isLoading = true;
-
-                    fetch('{{ route('comments.index') }}?tmdb_id={{ $tmdbId }}&type={{ $type }}', {
+                    fetch(`{{ route('comments.index') }}?tmdb_id={{ $tmdbId }}&type={{ $type }}&page=${page}` , {
                         headers: {
                             'Accept': 'application/json',
                             'X-Requested-With': 'XMLHttpRequest'
@@ -28,14 +30,22 @@
                         return response.json();
                     })
                     .then(data => {
-                        // S'assurer que data est un tableau
-                        this.comments = Array.isArray(data) ? data : (data.comments || []);
+                        this.comments = data.comments || [];
+                        this.currentPage = data.current_page || 1;
+                        this.lastPage = data.last_page || 1;
+                        this.total = data.total || 0;
                         this.isLoading = false;
                     })
                     .catch(error => {
                         console.error('Erreur:', error);
                         this.isLoading = false;
                     });
+                },
+
+                // Pagination
+                goToPage(page) {
+                    if (page < 1 || page > this.lastPage) return;
+                    this.init(page);
                 },
 
                 // Ajout d'un commentaire
@@ -179,7 +189,7 @@
             @endauth
 
             <div class="mb-4 sm:mb-6 text-xs sm:text-sm text-gray-300">
-                <span>Nombre de commentaires: <span x-text="comments.length"></span></span>
+                <span>Nombre de commentaires: <span x-text="total"></span></span>
             </div>
 
             {{-- Liste des commentaires --}}
@@ -210,6 +220,15 @@
                     <p class="text-gray-100 text-sm sm:text-base break-words" x-text="comment.content"></p>
                 </div>
             </template>
+
+            {{-- Pagination --}}
+            <div class="flex justify-center mt-6" x-show="lastPage > 1">
+                <button @click="goToPage(currentPage - 1)" :disabled="currentPage === 1"
+                        class="px-3 py-1 mx-1 rounded bg-dark-light text-white disabled:opacity-50">Précédent</button>
+                <span class="px-3 py-1 mx-1 bg-dark rounded text-primary-500 font-medium">Page <span x-text="currentPage"></span> / <span x-text="lastPage"></span></span>
+                <button @click="goToPage(currentPage + 1)" :disabled="currentPage === lastPage"
+                        class="px-3 py-1 mx-1 rounded bg-dark-light text-white disabled:opacity-50">Suivant</button>
+            </div>
 
             {{-- Modal de confirmation de suppression --}}
             <div x-show="showDeleteModal" 
