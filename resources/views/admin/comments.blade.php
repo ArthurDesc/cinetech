@@ -15,7 +15,7 @@
                     <th class="px-4 py-2">ID</th>
                     <th class="px-4 py-2">Utilisateur</th>
                     <th class="px-4 py-2">Type</th>
-                    <th class="px-4 py-2">TMDB ID</th>
+                    <th class="px-4 py-2">Média</th>
                     <th class="px-4 py-2">Contenu</th>
                     <th class="px-4 py-2">Date</th>
                     <th class="px-4 py-2">Action</th>
@@ -26,10 +26,17 @@
                     <tr class="border-b border-dark-lighter">
                         <td class="px-4 py-2">{{ $comment->id }}</td>
                         <td class="px-4 py-2">{{ $comment->user->nickname ?? 'Utilisateur supprimé' }}</td>
-                        <td class="px-4 py-2">{{ $comment->type }}</td>
-                        <td class="px-4 py-2">{{ $comment->tmdb_id }}</td>
+                        <td class="px-4 py-2">{{ $comment->type === 'movie' ? 'Film' : 'Série' }}</td>
+                        <td class="px-4 py-2">
+                            <a href="{{ $comment->type === 'movie' ? route('movies.show', $comment->tmdb_id) : route('tvshows.show', $comment->tmdb_id) }}"
+                               class="text-primary-400 hover:underline"
+                               target="_blank"
+                               rel="noopener">
+                                {{ $comment->media_title }}
+                            </a>
+                        </td>
                         <td class="px-4 py-2 max-w-xs truncate" title="{{ $comment->content }}">{{ $comment->content }}</td>
-                        <td class="px-4 py-2">{{ $comment->created_at->format('d/m/Y H:i') }}</td>
+                        <td class="px-4 py-2">{{ $comment->created_at->setTimezone('Europe/Paris')->format('d/m/Y H:i') }}</td>
                         <td class="px-4 py-2">
                             <button type="button" 
                                 onclick="openModal({{ $comment->id }}, this.dataset.content)" 
@@ -54,7 +61,7 @@
             <div class="bg-dark-light rounded-lg p-4 shadow">
                 <div class="flex justify-between items-start mb-2">
                     <div class="text-sm text-gray-400">ID: {{ $comment->id }}</div>
-                    <div class="text-sm text-gray-400">{{ $comment->created_at->format('d/m/Y H:i') }}</div>
+                    <div class="text-sm text-gray-400">{{ $comment->created_at->setTimezone('Europe/Paris')->format('d/m/Y H:i') }}</div>
                 </div>
                 <div class="mb-2">
                     <span class="text-gray-400">Par:</span>
@@ -62,9 +69,16 @@
                 </div>
                 <div class="mb-2">
                     <span class="text-gray-400">Type:</span>
-                    <span class="text-white">{{ $comment->type }}</span>
-                    <span class="text-gray-400 ml-2">TMDB ID:</span>
-                    <span class="text-white">{{ $comment->tmdb_id }}</span>
+                    <span class="text-white">{{ $comment->type === 'movie' ? 'Film' : 'Série' }}</span>
+                    <span class="text-gray-400 ml-2">Média:</span>
+                    <span class="text-white">
+                        <a href="{{ $comment->type === 'movie' ? route('movies.show', $comment->tmdb_id) : route('tvshows.show', $comment->tmdb_id) }}"
+                           class="text-primary-400 hover:underline"
+                           target="_blank"
+                           rel="noopener">
+                            {{ $comment->media_title }}
+                        </a>
+                    </span>
                 </div>
                 <div class="mb-3">
                     <div class="text-gray-400 mb-1">Contenu:</div>
