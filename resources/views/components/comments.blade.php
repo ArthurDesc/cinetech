@@ -8,6 +8,8 @@
                 content: '',
                 isSubmitting: false,
                 isLoading: true,
+                showDeleteModal: false,
+                commentToDelete: null,
 
                 // Initialisation des commentaires
                 init() {
@@ -89,20 +91,36 @@
                     }
                 },
 
+                // Ouvrir le modal de confirmation de suppression
+                openDeleteModal(comment) {
+                    this.commentToDelete = comment;
+                    this.showDeleteModal = true;
+                },
+
+                // Fermer le modal de confirmation de suppression
+                closeDeleteModal() {
+                    this.showDeleteModal = false;
+                    this.commentToDelete = null;
+                },
+
                 // Suppression d'un commentaire
-                async deleteComment(commentId) {
-                    if (!confirm('Voulez-vous vraiment supprimer ce commentaire ?')) return;
+                async deleteComment() {
+                    if (!this.commentToDelete) return;
+                    const commentId = this.commentToDelete.id;
 
                     try {
                         const response = await fetch(`/comments/${commentId}`, {
                             method: 'DELETE',
                             headers: {
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                'Accept': 'application/json'
                             }
                         });
 
                         if (response.ok) {
+                            // Mettre à jour la liste des commentaires immédiatement
                             this.comments = this.comments.filter(c => c.id !== commentId);
+                            this.closeDeleteModal();
 
                             if (window.Alpine.store('notifications')) {
                                 window.Alpine.store('notifications').add({
@@ -110,9 +128,17 @@
                                     message: 'Commentaire supprimé avec succès'
                                 });
                             }
+                        } else {
+                            throw new Error('Erreur lors de la suppression du commentaire');
                         }
                     } catch (error) {
                         console.error('Erreur:', error);
+                        if (window.Alpine.store('notifications')) {
+                            window.Alpine.store('notifications').add({
+                                type: 'error',
+                                message: error.message
+                            });
+                        }
                     }
                 }
             }"
@@ -171,7 +197,7 @@
                         <div class="flex items-center gap-2 mt-1 sm:mt-0">
                             @auth
                                 <template x-if="comment.user_id === {{ auth()->id() }}">
-                                    <button @click="deleteComment(comment.id)"
+                                    <button @click="openDeleteModal(comment)"
                                             class="text-red-400 hover:text-red-300 text-xs sm:text-sm">
                                         Supprimer
                                     </button>
@@ -184,6 +210,30 @@
                     <p class="text-gray-100 text-sm sm:text-base break-words" x-text="comment.content"></p>
                 </div>
             </template>
+
+            {{-- Modal de confirmation de suppression --}}
+            <div x-show="showDeleteModal" 
+                 class="fixed inset-0 z-50 flex items-center justify-center"
+                 x-cloak>
+                <div class="fixed inset-0 bg-black bg-opacity-50" @click="closeDeleteModal"></div>
+                <div class="bg-dark-light rounded-lg p-6 max-w-lg w-full mx-4 z-10 relative">
+                    <h2 class="text-xl font-bold mb-4 text-white">Confirmer la suppression</h2>
+                    <p class="text-gray-300 mb-4">Êtes-vous sûr de vouloir supprimer ce commentaire ?</p>
+                    <div x-show="commentToDelete" class="bg-dark rounded p-3 mb-4">
+                        <p class="text-gray-300 text-sm" x-text="commentToDelete?.content"></p>
+                    </div>
+                    <div class="flex justify-end gap-3">
+                        <button @click="closeDeleteModal" 
+                                class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">
+                            Annuler
+                        </button>
+                        <button @click="deleteComment" 
+                                class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                            Confirmer
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </x-magic-card>
 </div>
