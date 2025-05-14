@@ -1,0 +1,56 @@
+Table users {
+  id bigint [pk, increment]
+  nickname varchar
+  email varchar [unique]
+  email_verified_at timestamp
+  password varchar
+  is_admin boolean
+  remember_token varchar
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table comments {
+  id bigint [pk, increment]
+  user_id bigint [ref: > users.id]
+  tmdb_id int
+  type varchar
+  content text
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table failed_jobs {
+  id bigint [pk, increment]
+  uuid varchar [unique]
+  connection text
+  queue text
+  payload longtext
+  exception longtext
+  failed_at timestamp
+}
+
+Table password_reset_tokens {
+  email varchar [pk]
+  token varchar
+  created_at timestamp
+}
+
+Table personal_access_tokens {
+  id bigint [pk, increment]
+  tokenable_type varchar
+  tokenable_id bigint
+  name varchar
+  token varchar [unique]
+  abilities text
+  last_used_at timestamp
+  expires_at timestamp
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table migrations {
+  id int [pk, increment]
+  migration varchar
+  batch int
+} 
