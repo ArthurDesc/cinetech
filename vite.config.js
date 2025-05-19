@@ -1,5 +1,6 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import laravel from 'laravel-vite-plugin';
+import { fileURLToPath, URL } from 'node:url';
 
 export default defineConfig({
     plugins: [
@@ -13,5 +14,14 @@ export default defineConfig({
     ],
     server: {
         hmr: false,
+    },
+    resolve: {
+        alias: {
+            '@': fileURLToPath(new URL('./resources', import.meta.url))
+        }
+    },
+    test: {
+        globals: true,
+        environment: 'jsdom',
     },
 });

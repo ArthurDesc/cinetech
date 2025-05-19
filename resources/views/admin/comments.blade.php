@@ -103,7 +103,7 @@
     </div>
 </div>
 
-<!-- Modal de confirmation -->
+<!-- Confirmation popup -->
 <div id="deleteModal" class="fixed inset-0 z-50 hidden flex items-center justify-center h-screen">
     <!-- Overlay qui recouvre tout -->
     <div class="fixed inset-0 bg-black bg-opacity-50"></div>
