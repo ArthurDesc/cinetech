@@ -41,9 +41,10 @@ DB_USERNAME=root
 DB_PASSWORD=root
 ```
 
-5. Migrer la base de données
+5. Migrer la base de données et initialiser les données
 ```bash
 php artisan migrate
+php artisan db:seed
 ```
 
 6. Compiler les assets
